@@ -1,4 +1,4 @@
-from dsm_webscrape import run_scrape
+from scrape import run_scrape
 
 # This is a sample Python script.
 
