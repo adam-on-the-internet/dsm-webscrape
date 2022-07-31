@@ -7,10 +7,16 @@ def get_press_releases():
     news_headings = get_news_headings()
     new_news_headings = get_discovered_news_headings(news_headings)
     posts = get_news_posts_for_headings(new_news_headings)
-    # TODO: Save new posts
     for post in posts:
+        save_news_post(post)
         print(f" - {post.get_message()}")
     return posts
+
+
+def save_news_post(news_post):
+    url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/newsPost'
+    news_post_json = news_post.to_json()
+    return util.post_json(url, news_post_json)
 
 
 def refine_news_heading(news_heading_element):

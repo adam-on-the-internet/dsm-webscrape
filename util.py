@@ -43,3 +43,7 @@ def remove_script(soup):
     for script in soup.select('script'):
         script.extract()
 
+
+def post_json(url, data):
+    return requests.post(url, data)
+
