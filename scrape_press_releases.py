@@ -16,7 +16,8 @@ def get_press_releases():
 def save_news_post(news_post):
     url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/newsPost'
     news_post_json = news_post.to_json()
-    return util.post_json(url, news_post_json)
+    # print(news_post_json)
+    util.post_json(url, news_post_json)
 
 
 def refine_news_heading(news_heading_element):
@@ -44,7 +45,7 @@ def get_news_posts_for_headings(new_news_headings):
         # TODO can we strip out the comments?
         util.remove_script(page_content)
         util.remove_divs_with_class(page_content, "editcenterBtns")
-        post = NewsPost(heading.title, heading.url, heading.date, page_title, page_url, page_content)
+        post = NewsPost(heading.title, heading.url, heading.date, page_title, page_url, str(page_content))
         posts.append(post)
     return posts
 

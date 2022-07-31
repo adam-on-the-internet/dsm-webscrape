@@ -15,7 +15,7 @@ class NewsPost:
             "heading_title": self.heading_title,
             "heading_url": self.heading_url,
             "page_url": self.page_url,
-            "page_content": '',
+            "page_content": self.page_content,
             "page_title": self.page_title,
             "heading_date": self.heading_date
         }
