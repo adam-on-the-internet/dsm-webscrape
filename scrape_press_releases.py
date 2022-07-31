@@ -4,12 +4,12 @@ from models.NewsPost import NewsPost
 
 
 def get_press_releases():
-    print("## Starting to get press releases")
     news_headings = get_news_headings()
     new_news_headings = get_discovered_news_headings(news_headings)
     posts = get_news_posts_for_headings(new_news_headings)
     # TODO: Save new posts
-    print("## Done getting press releases")
+    for post in posts:
+        print(f" - {post.get_message()}")
     return posts
 
 
@@ -40,6 +40,7 @@ def get_news_posts_for_headings(new_news_headings):
         util.remove_divs_with_class(page_content, "editcenterBtns")
         post = NewsPost(heading.title, heading.url, heading.date, page_title, page_url, page_content)
         posts.append(post)
+    return posts
 
 
 def get_news_headings():

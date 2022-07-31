@@ -6,3 +6,6 @@ class NewsPost:
         self.page_title = page_title
         self.page_url = page_url
         self.page_content = page_content
+
+    def get_message(self):
+        return f"NEWS: {self.heading_title} ({self.page_url})"
