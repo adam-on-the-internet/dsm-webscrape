@@ -1,5 +1,16 @@
 import util
 from models.NewsHeading import NewsHeading
+from models.NewsPost import NewsPost
+
+
+def get_press_releases():
+    print("## Starting to get press releases")
+    news_headings = get_news_headings()
+    new_news_headings = get_discovered_news_headings(news_headings)
+    posts = get_news_posts_for_headings(new_news_headings)
+    # TODO: Save new posts
+    print("## Done getting press releases")
+    return posts
 
 
 def refine_news_heading(news_heading_element):
@@ -10,21 +21,34 @@ def refine_news_heading(news_heading_element):
     return news_heading
 
 
-def get_press_releases():
-    print("## Starting to get press releases")
+def get_discovered_news_headings(news_headings):
+    # TODO actually decide which are "new"
+    new_news_headings = [news_headings[0]]
+    return new_news_headings
 
+
+def get_news_posts_for_headings(new_news_headings):
+    posts = []
+    for heading in new_news_headings:
+        page_url = f"https://www.dsm.city/{heading.url}"
+        soup = util.convert_url_to_soup(page_url)
+        page_title = util.get_first_text_of_type_with_id(soup, "h2", "page-title")
+        page_content = util.get_elements_of_type_with_id(soup, "div", "post")[0]
+
+        # TODO can we strip out the comments?
+        util.remove_script(page_content)
+        util.remove_divs_with_class(page_content, "editcenterBtns")
+        post = NewsPost(heading.title, heading.url, heading.date, page_title, page_url, page_content)
+        posts.append(post)
+
+
+def get_news_headings():
     dsm_newslist_url = 'https://www.dsm.city/newslist.php'
     soup = util.convert_url_to_soup(dsm_newslist_url)
     news_heading_elements = util.get_elements_of_type_with_class(soup, "div", "news")
-    print(f" - Found {len(news_heading_elements)} news headings")
-
     news_headings = []
     for news_heading_element in news_heading_elements:
         news_heading = refine_news_heading(news_heading_element)
         news_headings.append(news_heading)
-
-    print("## Done getting press releases")
-
-    press_releases = []
-    return press_releases
+    return news_headings
 
