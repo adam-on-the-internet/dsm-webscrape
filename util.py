@@ -1,10 +1,19 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 
 
 def convert_url_to_soup(url):
     page = requests.get(url)
     return BeautifulSoup(page.text, "html.parser")
+
+
+def get_elements_of_type(soup, element_type):
+    return soup.find_all(element_type)
+
+
+def get_elements_of_type_with_text(soup, element_type, text):
+    return soup.find_all(element_type, text=re.compile(text))
 
 
 def get_elements_of_type_with_class(soup, element_type, class_name):
@@ -31,7 +40,11 @@ def get_text_from_element(element):
 
 def get_first_link(soup):
     elements = soup.find_all('a')
-    return elements[0].get('href')
+    return get_link_from_element(elements[0])
+
+
+def get_link_from_element(element):
+    return element.get('href')
 
 
 def remove_divs_with_class(soup, class_name):

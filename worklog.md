@@ -8,4 +8,5 @@
   - Began DB setup (for press releases)
   - "NewsPost" save working, except for the "page_content" piece
 - (3) July 31, 2022, 9:20pm-
-  - Filter down to actual "new" news posts
+  - Filter down to actual "new" news posts via NewsPost db
+  - Began "council meeting" scrape
