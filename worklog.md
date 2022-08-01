@@ -7,4 +7,5 @@
 - (2) July 31, 2022, 5:35pm-6:15pm (0:40 hours)
   - Began DB setup (for press releases)
   - "NewsPost" save working, except for the "page_content" piece
-- 
+- (3) July 31, 2022, 9:20pm-
+  - Filter down to actual "new" news posts

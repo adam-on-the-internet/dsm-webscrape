@@ -16,8 +16,13 @@ def get_press_releases():
 def save_news_post(news_post):
     url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/newsPost'
     news_post_json = news_post.to_json()
-    # print(news_post_json)
     util.post_json(url, news_post_json)
+
+
+def get_existing_news_post_urls():
+    url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/newsPost'
+    existing_news_posts = util.get_json(url)
+    return list(map(get_url, existing_news_posts))
 
 
 def refine_news_heading(news_heading_element):
@@ -28,26 +33,37 @@ def refine_news_heading(news_heading_element):
     return news_heading
 
 
+def get_url(news_post):
+    return news_post['heading_url']
+
+
 def get_discovered_news_headings(news_headings):
-    # TODO actually decide which are "new"
-    new_news_headings = [news_headings[0]]
+    new_news_headings = []
+    existing_urls = get_existing_news_post_urls()
+    for heading in news_headings:
+        if heading.url not in existing_urls:
+            new_news_headings.append(heading)
     return new_news_headings
 
 
 def get_news_posts_for_headings(new_news_headings):
     posts = []
     for heading in new_news_headings:
-        page_url = f"https://www.dsm.city/{heading.url}"
-        soup = util.convert_url_to_soup(page_url)
-        page_title = util.get_first_text_of_type_with_id(soup, "h2", "page-title")
-        page_content = util.get_elements_of_type_with_id(soup, "div", "post")[0]
-
-        # TODO can we strip out the comments?
-        util.remove_script(page_content)
-        util.remove_divs_with_class(page_content, "editcenterBtns")
-        post = NewsPost(heading.title, heading.url, heading.date, page_title, page_url, str(page_content))
+        post = get_news_post_for_heading(heading)
         posts.append(post)
     return posts
+
+
+def get_news_post_for_heading(heading):
+    page_url = f"https://www.dsm.city/{heading.url}"
+    soup = util.convert_url_to_soup(page_url)
+    page_title = util.get_first_text_of_type_with_id(soup, "h2", "page-title")
+    page_content = util.get_elements_of_type_with_id(soup, "div", "post")[0]
+    # TODO can we strip out the comments?
+    util.remove_script(page_content)
+    util.remove_divs_with_class(page_content, "editcenterBtns")
+    post = NewsPost(heading.title, heading.date, heading.url, page_title, page_url, str(page_content))
+    return post
 
 
 def get_news_headings():
