@@ -5,8 +5,11 @@
   - DISPLAY press releases somewhere
 - Council Meetings
   - SCRAPE for council meetings
+  - ADD new meetings
   - UPDATE when links are added
-- Meetings & Events & Agendas
+  - FILTER to only scrape certain meetings
+- Council Agendas
+- Other Events
 - YouTube videos
 - Tweets
 - Other stuff?

@@ -53,7 +53,11 @@ def remove_divs_with_class(soup, class_name):
 
 
 def remove_script(soup):
-    for script in soup.select('script'):
+    remove_tags(soup, "script")
+
+
+def remove_tags(soup, tag_name):
+    for script in soup.select(tag_name):
         script.extract()
 
 

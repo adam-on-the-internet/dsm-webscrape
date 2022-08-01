@@ -22,15 +22,43 @@ def get_summaries_for_headings(headings):
 
 
 def get_summary_for_heading(heading):
-    # TODO get proper page context
     details_url = f"https://www.dsm.city/{heading.details_url}"
-    summary = CouncilMeetingSummary(heading.date, heading.title, heading.subtitle, details_url)
+    soup = util.convert_url_to_soup(details_url)
+
+    breadcrumbs_element = util.get_elements_of_type_with_id(soup, "div", "breadcrumbs")[0]
+    util.remove_tags(breadcrumbs_element, "a")
+
+    subtitle = ""
+    subtitle_result = util.get_elements_of_type(breadcrumbs_element, "small")
+    if len(subtitle_result) > 0:
+        subtitle_element = subtitle_result[0]
+        subtitle = util.get_text_from_element(subtitle_element)
+        subtitle_element.extract()
+
+    title = util.get_text_from_element(breadcrumbs_element)
+
+    agenda_detail = util.get_elements_of_type_with_class(soup, "div", "agendadetail")[0]
+
+    date = util.get_first_text_of_type_with_class(agenda_detail, "div", "agenda_date").replace("Date:", "").strip()
+
+    link_elements = util.get_elements_of_type(agenda_detail, "a")
+    links = []
+    for link_element in link_elements:
+        link_text = util.get_text_from_element(link_element)
+        link_href = util.get_link_from_element(link_element)
+        if "http" not in link_href:
+            link_href = "https://www.dsm.city/" + link_href
+        link_href = link_href.replace(" ", "%20")
+        link = f"{link_text} :: {link_href}"
+        links.append(link)
+
+    summary = CouncilMeetingSummary(date, title, subtitle, details_url, links)
     return summary
 
 
 def get_headings_to_check(council_meeting_headings):
     # TODO actually pick which headings to check
-    return [council_meeting_headings[0]]
+    return [council_meeting_headings[0], council_meeting_headings[2]]
 
 
 def get_council_meeting_headings():
