@@ -22,8 +22,8 @@ def get_summaries_for_headings(headings):
 
 
 def get_summary_for_heading(heading):
-    details_url = f"https://www.dsm.city/{heading.details_url}"
-    soup = util.convert_url_to_soup(details_url)
+    page_url = f"https://www.dsm.city/{heading.url}"
+    soup = util.convert_url_to_soup(page_url)
 
     breadcrumbs_element = util.get_elements_of_type_with_id(soup, "div", "breadcrumbs")[0]
     util.remove_tags(breadcrumbs_element, "a")
@@ -52,13 +52,43 @@ def get_summary_for_heading(heading):
         link = f"{link_text} :: {link_href}"
         links.append(link)
 
-    summary = CouncilMeetingSummary(date, title, subtitle, details_url, links)
+    summary = CouncilMeetingSummary(date, title, subtitle, heading.url, page_url, links)
     return summary
 
 
 def get_headings_to_check(council_meeting_headings):
-    # TODO actually pick which headings to check
-    return [council_meeting_headings[0], council_meeting_headings[2]]
+    headings_to_check = []
+    existing_urls = get_existing_council_meeting_urls()
+
+    for heading in council_meeting_headings:
+        # Get New meetings
+        if heading.url not in existing_urls:
+            headings_to_check.append(heading)
+        # Get Recent Existing meetings
+        elif heading_is_recent(heading):
+            headings_to_check.append(heading)
+
+    # TODO remove hardcoding
+    headings_to_check = [council_meeting_headings[0], council_meeting_headings[1], council_meeting_headings[2]]
+
+    return headings_to_check
+
+
+def heading_is_recent(heading):
+    # TODO use heading date to check recency (TRUE for meetings with month offset -1/0/+1)
+    return False
+
+
+def get_existing_council_meeting_urls():
+    # TODO use REAL existing data
+    url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/councilMeetingSummaries'
+    # existing_news_posts = util.get_json(url)
+    # return list(map(get_url, existing_news_posts))
+    return []
+
+
+def get_url(summary):
+    return summary['heading_url']
 
 
 def get_council_meeting_headings():
