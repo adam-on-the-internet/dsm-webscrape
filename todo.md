@@ -2,8 +2,8 @@
 
 - Setup github issue w/ link for more info
 - Press Releases
-  - ANNOUNCE when new press release is found (issue? email?)
-  - DISPLAY press releases somewhere
+  - DISPLAY when press releases are added
+  - ALLOW users to "dismiss" press releases once viewed
 - Council Meetings
   - SCRAPE for council meetings
   - ADD new meetings

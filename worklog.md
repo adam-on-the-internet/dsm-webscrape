@@ -13,5 +13,7 @@
   - Began building filter for which meetings to dig into
 - (4) August 4, 2022, 5:00pm-5:05pm (0:05 hours)
   - Begin setup issue template
-- (5) August 5, 2022, 12:10pm- ( hours)
+- (5) August 5, 2022, 12:10pm-12:25pm (0:15 hours)
   - Attempt first version of issue generation
+  - Got basic-level issue generation working for notifications
+- (6)
