@@ -10,7 +10,8 @@ def get_council_meetings():
     for summary in summaries:
         print(f" - {summary.get_message()}")
         # TODO save
-    return summaries
+    # return summaries #TODO return real value
+    return []
 
 
 def get_summaries_for_headings(headings):
