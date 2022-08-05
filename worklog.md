@@ -11,4 +11,7 @@
   - Filter down to actual "new" news posts via NewsPost db
   - Began "council meeting" scrape, got "summary" items
   - Began building filter for which meetings to dig into
-- (4)
+- (4) August 4, 2022, 5:00pm-5:05pm (0:05 hours)
+  - Begin setup issue template
+- (5) August 5, 2022, 12:10pm- ( hours)
+  - Attempt first version of issue generation

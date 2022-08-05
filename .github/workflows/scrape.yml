@@ -18,3 +18,11 @@ jobs:
       - name: scan
         id: scan
         run: python main.py
+      - name: create an issue
+        if: ${{ steps.scan.outputs.FOUND_UPDATE == 'True' }}
+        uses: dblock/create-a-github-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          COUNT: ${{ steps.scan.outputs.COUNT }}
+        with:
+          filename: .github/ISSUE_TEMPLATE/new_message.md

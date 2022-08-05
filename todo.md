@@ -1,5 +1,6 @@
 # TODO
 
+- Setup github issue original, plan for more
 - Press Releases
   - ANNOUNCE when new press release is found (issue? email?)
   - DISPLAY press releases somewhere
