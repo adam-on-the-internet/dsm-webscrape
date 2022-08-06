@@ -13,5 +13,8 @@ class CalendarEvent:
         # Should we link to month calendar?
         # https://www.dsm.city/calendar_app/calendar_event_detail.html?eventId=1320&date=8/2/2022&show=no
 
+    def get_date_full(self):
+        return f"{self.year}-{self.month}-{self.day}"
+
     def get_message(self):
-        return f"{self.year}-{self.month}-{self.day} {self.name}"
+        return f"{self.get_date_full()} {self.name}"

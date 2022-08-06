@@ -1,6 +1,18 @@
 import datetime
 
 
+def is_date_in_month_and_year(date, month, year):
+    # using format: MM-DD-YYYY
+    date_pieces = date.split("-")
+    date_month = date_pieces[0]
+    date_year = date_pieces[2]
+    return date_month == month and date_year == year
+
+
+def sort_items_by_date(items):
+    items.sort(key=lambda x: datetime.datetime.strptime(x.get_date_full(), "%Y-%m-%d"), reverse=False)
+
+
 def pick_month_year_stamps(offset_count):
     relative_start = offset_count * -1
     relative_end = offset_count + 1

@@ -5,9 +5,12 @@ from bs4 import BeautifulSoup
 from util import request_util
 
 
-def get_xml_attribute(xml, attribute):
+def get_xml_attr(xml, attribute):
     raw_value = xml.find(attribute)
-    return raw_value.get_text().strip()
+    if raw_value is None:
+        return ""
+    else:
+        return raw_value.get_text().strip()
 
 
 def convert_url_to_soup(url):
@@ -51,7 +54,11 @@ def get_first_link(soup):
 
 
 def get_link_from_element(element):
-    return element.get('href')
+    return get_element_attr(element, 'href')
+
+
+def get_element_attr(element, attribute):
+    return element.get(attribute)
 
 
 def remove_divs_with_class(soup, class_name):

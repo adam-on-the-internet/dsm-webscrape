@@ -4,54 +4,44 @@ from models.CalendarEvent.RawCalendarEvent import RawCalendarEvent
 
 
 def get_calendar_events():
-    calendar_events = get_timely_calendar_events()
+    calendar_events = find_calendar_events()
+    save_calendar_events(calendar_events)
+    return []  # TODO return actual events
 
+
+def find_calendar_events():
+    calendar_events = get_timely_calendar_events()
     # TODO filter off existing events
     existing_events = []
+    return calendar_events
 
+
+def save_calendar_events(calendar_events):
     # TODO save any found events
     for calendar_event in calendar_events:
         # calendar_event_repo.save_calendar_event(calendar_event)
         print(f"  + {calendar_event.get_message()}")
 
-    return []  # TODO return actual events
-
 
 def get_timely_calendar_events():
     # TODO validate this works as expected by comparing against real
-    calendar_events = []
-    offset = 1
-    month_year_stamps = date_util.pick_month_year_stamps(offset)
-    for month_year_stamp in month_year_stamps:
-        monthly_events = get_monthly_calendar_events(month_year_stamp)
-        calendar_events = calendar_events + monthly_events
+    raw_events = get_timely_raw_events()
+    calendar_events = build_calendar_events(raw_events)
+    date_util.sort_items_by_date(calendar_events)
     return calendar_events
 
 
-def get_monthly_calendar_events(month_year_stamp):
-    monthly_events = []
-    stamp_pieces = month_year_stamp.split("-")
-    month = stamp_pieces[0]
-    year = stamp_pieces[1]
-
-    raw_events = get_events_for_month(month, year)
-
+def build_calendar_events(raw_events):
+    calendar_events = []
     for raw_event in raw_events:
-        if raw_event.is_repeat():
-            for occurrence in raw_event.get_occurrence_dates():
-                date_pieces = occurrence.split("-")
-                date_month = date_pieces[0]
-                date_year = date_pieces[2]
-                if date_month == month and date_year == year:
-                    day = date_pieces[1]
-                    calendar_event = build_calendar_event(day, month, year, raw_event)
-                    monthly_events.append(calendar_event)
-        else:
-            day = raw_event.date_begin.split(" ")[1].split(",")[0]
+        for occurrence in raw_event.occurrences:
+            date_pieces = occurrence.split("-")
+            month = date_pieces[0]
+            day = date_pieces[1]
+            year = date_pieces[2]
             calendar_event = build_calendar_event(day, month, year, raw_event)
-            monthly_events.append(calendar_event)
-    monthly_events.sort(key=lambda x: int(x.day), reverse=False)
-    return monthly_events
+            calendar_events.append(calendar_event)
+    return calendar_events
 
 
 def build_calendar_event(day, month, year, raw_event):
@@ -64,23 +54,30 @@ def build_calendar_event(day, month, year, raw_event):
     return calendar_event
 
 
-def get_events_for_month(month, year):
+def get_timely_raw_events():
+    raw_events = []
+    offset = 1
+    month_year_stamps = date_util.pick_month_year_stamps(offset)
+    for month_year_stamp in month_year_stamps:
+        monthly_raw_events = get_monthly_raw_events(month_year_stamp)
+        raw_events = raw_events + monthly_raw_events
+    return raw_events
+
+
+def get_monthly_raw_events(month_year_stamp):
+    stamp_pieces = month_year_stamp.split("-")
+    month = stamp_pieces[0]
+    year = stamp_pieces[1]
+    return get_raw_calendar_events_for_month(month, year)
+
+
+def get_raw_calendar_events_for_month(month, year):
     xml_events = get_xml_events_for_month(month, year)
     raw_calendar_events = []
     for xml_event in xml_events:
-        raw_calendar_event = build_raw_calendar_event(xml_event)
+        raw_calendar_event = RawCalendarEvent(xml_event, month, year)
         raw_calendar_events.append(raw_calendar_event)
     return raw_calendar_events
-
-
-def build_raw_calendar_event(xml_event):
-    name = soup_util.get_xml_attribute(xml_event, "name")
-    date_begin = soup_util.get_xml_attribute(xml_event, "date_begin")
-    time_begin = soup_util.get_xml_attribute(xml_event, "time_begin")
-    detail = soup_util.get_xml_attribute(xml_event, "detail")
-    repeat = soup_util.get_xml_attribute(xml_event, "repeat")
-    raw_calendar_event = RawCalendarEvent(xml_event, name, date_begin, time_begin, detail, repeat)
-    return raw_calendar_event
 
 
 def get_xml_events_for_month(month, year):
