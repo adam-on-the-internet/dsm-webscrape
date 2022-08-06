@@ -19,3 +19,6 @@
 - YouTube videos
 - Tweets
 - Any Other Data?
+  - Boards and commissions https://www.dsm.city/government/boards_and_commissions/index.php
+  - Committeses https://www.dsm.city/government/committees.php
+  - Contacts https://www.dsm.city/government/index.php
