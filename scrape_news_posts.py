@@ -14,8 +14,7 @@ def get_news_posts():
 
 def find_news_posts():
     found_news_headings = find_news_headings()
-    news_posts = build_news_posts(found_news_headings)
-    return [news_posts[0]]
+    return build_news_posts(found_news_headings)
 
 
 def find_news_headings():
