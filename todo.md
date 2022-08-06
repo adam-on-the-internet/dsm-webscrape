@@ -7,14 +7,18 @@
 
 ## Data Work
 
-- Press Releases
-  - SHOW page content in web view
 - Calendar Events
+  - SCRAPE for calendar events within range
+  - SAVE calendar events
+  - DISPLAY calendar events
+  - CHECK calendar events
 - Council Meetings
   - SCRAPE for council meetings
   - ADD new meetings
   - UPDATE when links are added
   - FILTER to only scrape certain meetings
+- Press Releases
+  - SHOW page content in web view
 - Council Agendas
 - YouTube videos
 - Tweets
