@@ -1,4 +1,4 @@
-import scrape_data_service
+import news_post_repo
 import soup_util
 from models.NewsHeading import NewsHeading
 from models.NewsPost import NewsPost
@@ -7,7 +7,7 @@ from models.NewsPost import NewsPost
 def get_news_posts():
     found_news_posts = find_news_posts()
     for news_post in found_news_posts:
-        scrape_data_service.save_news_post(news_post)
+        news_post_repo.save_news_post(news_post)
         print(f"  + {news_post.get_message()}")
     return found_news_posts
 
@@ -35,7 +35,7 @@ def build_news_heading(news_heading_element):
 
 def get_found_news_headings(news_headings):
     found_news_headings = []
-    existing_urls = scrape_data_service.get_news_post_urls()
+    existing_urls = news_post_repo.get_news_post_urls()
     for heading in news_headings:
         if heading.url not in existing_urls:
             found_news_headings.append(heading)
