@@ -27,3 +27,5 @@
   - Some detailed fiddling with calendar potential
 - (8) August 6, 2022, 9:55am-? (?:?? hours)
   - Refactoring .py into folders
+  - Rework how Calendar Events are built
+  - Begin on Calendar Event save

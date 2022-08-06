@@ -1,4 +1,5 @@
 from util import date_util, soup_util
+from repo import calendar_event_repo
 from models.CalendarEvent.CalendarEvent import CalendarEvent
 from models.CalendarEvent.RawCalendarEvent import RawCalendarEvent
 
@@ -10,16 +11,18 @@ def get_calendar_events():
 
 
 def find_calendar_events():
+    found_calendar_events = []
     calendar_events = get_timely_calendar_events()
-    # TODO filter off existing events
-    existing_events = []
-    return calendar_events
+    existing_event_messages = calendar_event_repo.get_calendar_events()
+    for calendar_event in calendar_events:
+        if calendar_event.get_message() not in existing_event_messages:
+            found_calendar_events.append(calendar_event)
+    return found_calendar_events
 
 
 def save_calendar_events(calendar_events):
-    # TODO save any found events
     for calendar_event in calendar_events:
-        # calendar_event_repo.save_calendar_event(calendar_event)
+        calendar_event_repo.save_calendar_event(calendar_event)
         print(f"  + {calendar_event.get_message()}")
 
 
@@ -50,7 +53,7 @@ def build_calendar_event(day, month, year, raw_event):
     time = raw_event.time_begin
     if len(str(day)) == 1:
         day = f"0{day}"
-    calendar_event = CalendarEvent(name, day, month, year, time, detail)
+    calendar_event = CalendarEvent(raw_event, day, month, year)
     return calendar_event
 
 

@@ -20,7 +20,7 @@ class RawCalendarEvent:
         # Unused XML fields
         self.duration = self.get_attr("duration")
         self.duration_formatted = self.get_attr("duration_formatted")
-        self.notable = self.get_attr("notable")
+        self.is_notable = self.get_attr("notable") == "yes"
         self.repeat_units = self.get_attr("repeatUnits")
         self.repeat_count = self.get_attr("repeatCount")
         self.repeat_other = self.get_attr("repeatOther")
