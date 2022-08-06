@@ -25,7 +25,9 @@
 - (7) August 6, 2022, 12:35am-2:00am (1:25 hours)
   - Begin basic calendar scrape, pull up events by months
   - Some detailed fiddling with calendar potential
-- (8) August 6, 2022, 9:55am-? (?:?? hours)
+- (8) August 6, 2022, 9:55am-1:20pm (3:25 hours)
   - Refactoring .py into folders
   - Rework how Calendar Events are built
   - Begin on Calendar Event save
+  - Able to save, display, and check Calendar Events
+- (9)
