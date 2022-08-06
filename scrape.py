@@ -13,10 +13,13 @@ def run_scrape():
 def get_items():
     print(" - Looking for News Posts...")
     news_posts = get_news_posts()
+
     print(" - Looking for Calendar Events...")
     calendar_events = get_calendar_events()
+
     print(" - Looking for Council Meetings...")
     council_meetings = get_council_meetings()
+
     # TODO add more scrape elements
     item_count = len(news_posts) + len(council_meetings) + len(calendar_events)
     return item_count

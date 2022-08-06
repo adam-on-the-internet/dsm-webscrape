@@ -9,7 +9,10 @@
 
 - Calendar Events
   - SCRAPE for calendar events within range
+    - Verify current method works
+    - Spell out model, add fields if necessary
   - SAVE calendar events
+  - FILTER based on existing calendar events
   - DISPLAY calendar events
   - CHECK calendar events
 - Council Meetings

@@ -5,6 +5,11 @@ from bs4 import BeautifulSoup
 import request_util
 
 
+def get_xml_attribute(xml, attribute):
+    raw_value = xml.find(attribute)
+    return raw_value.get_text().strip()
+
+
 def convert_url_to_soup(url):
     page = request_util.get(url)
     return BeautifulSoup(page.text, "html.parser")
