@@ -7,7 +7,7 @@ from models.CalendarEvent.RawCalendarEvent import RawCalendarEvent
 def get_calendar_events():
     calendar_events = find_calendar_events()
     save_calendar_events(calendar_events)
-    return []  # TODO return actual events
+    return calendar_events
 
 
 def find_calendar_events():
@@ -27,7 +27,6 @@ def save_calendar_events(calendar_events):
 
 
 def get_timely_calendar_events():
-    # TODO validate this works as expected by comparing against real
     raw_events = get_timely_raw_events()
     calendar_events = build_calendar_events(raw_events)
     date_util.sort_items_by_date(calendar_events)
