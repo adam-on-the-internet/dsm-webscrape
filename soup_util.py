@@ -1,10 +1,12 @@
-import requests
 import re
+
 from bs4 import BeautifulSoup
+
+import request_util
 
 
 def convert_url_to_soup(url):
-    page = requests.get(url)
+    page = request_util.get(url)
     return BeautifulSoup(page.text, "html.parser")
 
 
@@ -59,21 +61,3 @@ def remove_script(soup):
 def remove_tags(soup, tag_name):
     for script in soup.select(tag_name):
         script.extract()
-
-
-def post_json(url, data):
-    return requests.post(url, data)
-
-
-def get_json(url):
-    response = get(url)
-    return response.json()
-
-
-def get(url):
-    return requests.get(url)
-
-
-def set_env_output(name, value):
-    print(f"Output - {name} : {value}")
-    print(f"::set-output name={name}::{value}")

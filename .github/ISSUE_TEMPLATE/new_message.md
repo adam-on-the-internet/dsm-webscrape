@@ -14,4 +14,4 @@ We found one or more new updates to the City of Des Moines Website.
 
 This scan currently checks for:
 
-- Press Releases
+- News Posts

@@ -1,21 +1,21 @@
 class NewsPost:
-    def __init__(self, heading_title, heading_date, heading_url, page_title, page_url, page_content):
+    def __init__(self, url, heading_title, heading_date, page_title, page_content):
+        self.url = url
         self.heading_title = heading_title
         self.heading_date = heading_date
-        self.heading_url = heading_url
         self.page_title = page_title
-        self.page_url = page_url
         self.page_content = page_content
+        self.checked = False
+        self.found_date = None
 
     def get_message(self):
-        return f"NEWS: {self.heading_title} ({self.page_url})"
+        return f"NEWS: {self.heading_title} ({self.url})"
 
     def to_json(self):
         return {
+            "url": self.url,
             "heading_title": self.heading_title,
-            "heading_url": self.heading_url,
-            "page_url": self.page_url,
-            "page_content": self.page_content,
+            "heading_date": self.heading_date,
             "page_title": self.page_title,
-            "heading_date": self.heading_date
+            "page_content": self.page_content,
         }
