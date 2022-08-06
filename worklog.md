@@ -22,3 +22,4 @@
   - Allow management by "checking" News Posts
   - Get first "full" scan working w/ issue report linking to management page
   - Check initial scan news posts
+- (7) 
