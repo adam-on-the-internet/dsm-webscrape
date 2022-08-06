@@ -1,15 +1,19 @@
-import news_post_repo
-import soup_util
-from models.NewsHeading import NewsHeading
-from models.NewsPost import NewsPost
+from repo import news_post_repo
+from util import soup_util
+from models.News.NewsHeading import NewsHeading
+from models.News.NewsPost import NewsPost
 
 
 def get_news_posts():
     found_news_posts = find_news_posts()
+    save_news_posts(found_news_posts)
+    return found_news_posts
+
+
+def save_news_posts(found_news_posts):
     for news_post in found_news_posts:
         news_post_repo.save_news_post(news_post)
         print(f"  + {news_post.get_message()}")
-    return found_news_posts
 
 
 def find_news_posts():
@@ -73,14 +77,14 @@ def get_page_title(page):
 
 def get_all_news_headings():
     news_headings = []
-    news_heading_elements = get_news_heading_elements()
+    news_heading_elements = scrape_news_headings()
     for news_heading_element in news_heading_elements:
         news_heading = build_news_heading(news_heading_element)
         news_headings.append(news_heading)
     return news_headings
 
 
-def get_news_heading_elements():
+def scrape_news_headings():
     dsm_city_news_post_url = 'https://www.dsm.city/newslist.php'
     page = soup_util.convert_url_to_soup(dsm_city_news_post_url)
     news_heading_elements = soup_util.get_elements_of_type_with_class(page, "div", "news")

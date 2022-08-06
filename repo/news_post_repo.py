@@ -1,4 +1,4 @@
-import request_util
+from util import request_util
 
 news_post_data_url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/newsPost'
 

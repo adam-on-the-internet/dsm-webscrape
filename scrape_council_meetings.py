@@ -1,6 +1,6 @@
-import soup_util
-from models.CouncilMeetingHeading import CouncilMeetingHeading
-from models.CouncilMeetingSummary import CouncilMeetingSummary
+from util import soup_util
+from models.CouncilMeeting.CouncilMeetingHeading import CouncilMeetingHeading
+from models.CouncilMeeting.CouncilMeetingSummary import CouncilMeetingSummary
 
 
 def get_council_meetings():

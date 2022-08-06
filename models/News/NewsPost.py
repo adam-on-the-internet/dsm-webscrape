@@ -5,8 +5,6 @@ class NewsPost:
         self.heading_date = heading_date
         self.page_title = page_title
         self.page_content = page_content
-        self.checked = False
-        self.found_date = None
 
     def get_message(self):
         return f"NEWS: {self.heading_title} ({self.url})"

@@ -1,7 +1,6 @@
-import date_util
-import soup_util
-from models.CalendarEvent import CalendarEvent
-from models.RawCalendarEvent import RawCalendarEvent
+from util import date_util, soup_util
+from models.CalendarEvent.CalendarEvent import CalendarEvent
+from models.CalendarEvent.RawCalendarEvent import RawCalendarEvent
 
 
 def get_calendar_events():

@@ -2,7 +2,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-import request_util
+from util import request_util
 
 
 def get_xml_attribute(xml, attribute):
