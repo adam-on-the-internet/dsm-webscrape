@@ -1,6 +1,7 @@
 # TODO
 
-- Setup github issue w/ link for more info
+- move .py files into folders by type
+- refine "requirements.txt" to remove unused items
 - Press Releases
   - SHOW page content in web view
 - Council Meetings

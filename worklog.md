@@ -16,7 +16,7 @@
 - (5) August 5, 2022, 12:10pm-12:25pm (0:15 hours)
   - Attempt first version of issue generation
   - Got basic-level issue generation working for notifications
-- (6) August 5, 2022, 8:30pm-10:30 (2:00 hours)
+- (6) August 5, 2022, 8:30pm-10:35 (2:05 hours)
   - Adjust (simplify) News Post model & refactor
   - Build out initial dsmpth page that shows basic news posts
   - Allow management by "checking" News Posts
