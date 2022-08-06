@@ -8,7 +8,7 @@ labels: found
 We found one or more new updates to the City of Des Moines Website.
 
 - Number of updates found: {{ env.COUNT }}
-- For more info, go to: (tbd)
+- For more info, go to: [https://www.dsmpeoplestownhall.com/#/dsm-city-updates](https://www.dsmpeoplestownhall.com/#/dsm-city-updates)
 
 ## Details
 

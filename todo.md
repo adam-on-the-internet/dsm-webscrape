@@ -2,8 +2,7 @@
 
 - Setup github issue w/ link for more info
 - Press Releases
-  - DISPLAY when press releases are added
-  - ALLOW users to "dismiss" press releases once viewed
+  - SHOW page content in web view
 - Council Meetings
   - SCRAPE for council meetings
   - ADD new meetings

@@ -18,3 +18,5 @@
   - Got basic-level issue generation working for notifications
 - (6) August 5, 2022, 8:30pm-
   - Adjust (simplify) News Post model & refactor
+  - Build out initial dsmpth page that shows basic news posts
+  - Allow management by "checking" News Posts
