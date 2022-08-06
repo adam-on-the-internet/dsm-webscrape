@@ -22,5 +22,8 @@
   - Allow management by "checking" News Posts
   - Get first "full" scan working w/ issue report linking to management page
   - Check initial scan news posts
-- (7) August 6, 2022, 12:35am-1:50am (1:15 hours)
+- (7) August 6, 2022, 12:35am-2:00am (1:25 hours)
   - Begin basic calendar scrape, pull up events by months
+  - Some detailed fiddling with calendar potential
+- (8)
+  - 

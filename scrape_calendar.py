@@ -30,7 +30,6 @@ def get_timely_calendar_events():
 
 
 def get_monthly_calendar_events(month_year_stamp):
-    print(f"  - Checking {month_year_stamp}")
     monthly_events = []
     stamp_pieces = month_year_stamp.split("-")
     month = stamp_pieces[0]
@@ -52,6 +51,7 @@ def get_monthly_calendar_events(month_year_stamp):
             day = raw_event.date_begin.split(" ")[1].split(",")[0]
             calendar_event = build_calendar_event(day, month, year, raw_event)
             monthly_events.append(calendar_event)
+    monthly_events.sort(key=lambda x: int(x.day), reverse=False)
     return monthly_events
 
 
@@ -59,6 +59,8 @@ def build_calendar_event(day, month, year, raw_event):
     name = raw_event.name
     detail = raw_event.detail
     time = raw_event.time_begin
+    if len(str(day)) == 1:
+        day = f"0{day}"
     calendar_event = CalendarEvent(name, day, month, year, time, detail)
     return calendar_event
 
