@@ -7,10 +7,9 @@
 ## Data Work
 
 - Council Meetings
-  - SCRAPE for council meetings
-  - ADD new meetings
-  - UPDATE when links are added
-  - FILTER to only scrape certain meetings
+  - Logic for which meetings to re-scan
+  - Logic for meetings found that are updated
+  - How to display updates?
 - Council Agendas
   - Begin
 - Press Releases

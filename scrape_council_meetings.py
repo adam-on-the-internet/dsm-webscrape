@@ -1,47 +1,78 @@
-from util import soup_util
 from models.CouncilMeeting.CouncilMeetingHeading import CouncilMeetingHeading
 from models.CouncilMeeting.CouncilMeetingSummary import CouncilMeetingSummary
+from repo import council_meeting_repo
+from util import soup_util
 
 
 def get_council_meetings():
+    council_meetings = find_council_meetings()
+    save_council_meetings(council_meetings)
+    return council_meetings
+
+
+def save_council_meetings(council_meetings):
+    for council_meeting in council_meetings:
+        council_meeting_repo.save_council_meeting(council_meeting)
+        print(f"  + {council_meeting.get_message()}")
+
+
+def find_council_meetings():
     council_meeting_headings = get_council_meeting_headings()
-    headings_to_check = get_headings_to_check(council_meeting_headings)
-    summaries = get_summaries_for_headings(headings_to_check)
-    for summary in summaries:
-        print(f"  + {summary.get_message()}")
-        # TODO save
-    # return summaries # TODO return real value
-    return []
+    found_headings = find_new_and_updated_headings(council_meeting_headings)
+    return get_summaries_for_headings(found_headings)
 
 
-def get_summaries_for_headings(headings):
-    summaries = []
-    for heading in headings:
-        summary = get_summary_for_heading(heading)
-        summaries.append(summary)
-    return summaries
+def get_summaries_for_headings(council_meeting_headings):
+    council_meeting_summaries = []
+    for council_meeting_heading in council_meeting_headings:
+        council_meeting_summary = build_council_meeting_summary(council_meeting_heading)
+        council_meeting_summaries.append(council_meeting_summary)
+    return council_meeting_summaries
 
 
-def get_summary_for_heading(heading):
-    page_url = f"https://www.dsm.city/{heading.url}"
-    soup = soup_util.convert_url_to_soup(page_url)
+def build_council_meeting_summary(council_meeting_heading):
+    url = council_meeting_heading.url
+    page = soup_util.convert_url_to_soup(url)
+    breadcrumbs_element = get_breadcrumbs_element(page)
+    subtitle = get_subtitle_for_summary(breadcrumbs_element)
+    full_title = soup_util.get_text_from_element(breadcrumbs_element)
+    full_title_pieces = full_title.split("@")
+    title = full_title_pieces[0].strip()
+    time = full_title_pieces[1].strip()
+    agenda_detail = soup_util.get_elements_of_type_with_class(page, "div", "agendadetail")[0]
+    links = get_links(agenda_detail)
+    date_pieces = get_date_pieces(agenda_detail)
+    day = date_pieces[1]
+    month = date_pieces[0]
+    year = f"20{date_pieces[2]}"
+    return CouncilMeetingSummary(day, month, year, time, title, subtitle, url, links)
 
-    breadcrumbs_element = soup_util.get_elements_of_type_with_id(soup, "div", "breadcrumbs")[0]
+
+def get_date_pieces(agenda_detail):
+    date = soup_util.get_first_text_of_type_with_class(agenda_detail, "div", "agenda_date").replace("Date:", "").strip()
+    date_piece = date.split(" ")[-1].replace("(", "").replace(")", "")
+    date_pieces = date_piece.split("/")
+    return date_pieces
+
+
+def get_breadcrumbs_element(page):
+    breadcrumbs_element = soup_util.get_elements_of_type_with_id(page, "div", "breadcrumbs")[0]
     soup_util.remove_tags(breadcrumbs_element, "a")
+    return breadcrumbs_element
 
-    subtitle = ""
+
+def get_subtitle_for_summary(breadcrumbs_element):
     subtitle_result = soup_util.get_elements_of_type(breadcrumbs_element, "small")
     if len(subtitle_result) > 0:
         subtitle_element = subtitle_result[0]
         subtitle = soup_util.get_text_from_element(subtitle_element)
         subtitle_element.extract()
+        return subtitle
+    else:
+        return ""
 
-    title = soup_util.get_text_from_element(breadcrumbs_element)
 
-    agenda_detail = soup_util.get_elements_of_type_with_class(soup, "div", "agendadetail")[0]
-
-    date = soup_util.get_first_text_of_type_with_class(agenda_detail, "div", "agenda_date").replace("Date:", "").strip()
-
+def get_links(agenda_detail):
     link_elements = soup_util.get_elements_of_type(agenda_detail, "a")
     links = []
     for link_element in link_elements:
@@ -52,27 +83,23 @@ def get_summary_for_heading(heading):
         link_href = link_href.replace(" ", "%20")
         link = f"{link_text} :: {link_href}"
         links.append(link)
-
-    summary = CouncilMeetingSummary(date, title, subtitle, heading.url, page_url, links)
-    return summary
+    return links
 
 
-def get_headings_to_check(council_meeting_headings):
-    headings_to_check = []
-    existing_urls = get_existing_council_meeting_urls()
+def find_new_and_updated_headings(council_meeting_headings):
+    found_council_meeting_headings = []
+    existing_urls = council_meeting_repo.get_council_meeting_urls()
 
     for heading in council_meeting_headings:
         # Get New meetings
         if heading.url not in existing_urls:
-            headings_to_check.append(heading)
+            found_council_meeting_headings.append(heading)
         # Get Recent Existing meetings
         elif heading_is_recent(heading):
-            headings_to_check.append(heading)
+            # TODO how to handle updated meetings?
+            found_council_meeting_headings.append(heading)
 
-    # TODO remove hardcoding
-    headings_to_check = [council_meeting_headings[0], council_meeting_headings[1], council_meeting_headings[2]]
-
-    return headings_to_check
+    return found_council_meeting_headings
 
 
 def heading_is_recent(heading):
@@ -80,23 +107,11 @@ def heading_is_recent(heading):
     return False
 
 
-def get_existing_council_meeting_urls():
-    # TODO use REAL existing data
-    url = 'https://aoti-basic-express-app.herokuapp.com/dsmScrape/councilMeetingSummaries'
-    # existing_news_posts = util.get_json(url)
-    # return list(map(get_url, existing_news_posts))
-    return []
-
-
-def get_url(summary):
-    return summary['heading_url']
-
-
 def get_council_meeting_headings():
     council_meeting_elements = get_council_meeting_heading_elements()
     headings = []
     for council_meeting_element in council_meeting_elements:
-        heading = refine_council_meeting_heading(council_meeting_element)
+        heading = build_council_meeting_heading(council_meeting_element)
         headings.append(heading)
     return headings
 
@@ -110,18 +125,28 @@ def get_council_meeting_heading_elements():
     return council_meeting_elements
 
 
-def refine_council_meeting_heading(council_meeting_element):
+def build_council_meeting_heading(council_meeting_element):
     title_element = soup_util.get_elements_of_type(council_meeting_element, "th")[0]
-    subtitle = ""
+    subtitle = get_subtitle_for_heading(title_element)
+    title_element_text = soup_util.get_text_from_element(title_element)
+    date = title_element_text.split(" ", 1)[0].strip()
+    title = title_element_text.split(" ", 1)[1].strip()
+    url = get_url_for_heading(council_meeting_element)
+    return CouncilMeetingHeading(date, title, subtitle, url)
+
+
+def get_url_for_heading(council_meeting_element):
+    link_element = soup_util.get_elements_of_type_with_text(council_meeting_element, "a", "More...")[0]
+    partial_url = soup_util.get_link_from_element(link_element)
+    return f"https://www.dsm.city/{partial_url}"
+
+
+def get_subtitle_for_heading(title_element):
     subtitle_result = soup_util.get_elements_of_type(title_element, "small")
     if len(subtitle_result) > 0:
         subtitle_element = subtitle_result[0]
         subtitle = soup_util.get_text_from_element(subtitle_element)
         subtitle_element.extract()
-    title_element_text = soup_util.get_text_from_element(title_element)
-    date = title_element_text.split(" ", 1)[0].strip()
-    title = title_element_text.split(" ", 1)[1].strip()
-    link_element = soup_util.get_elements_of_type_with_text(council_meeting_element, "a", "More...")[0]
-    link = soup_util.get_link_from_element(link_element)
-    heading = CouncilMeetingHeading(date, title, subtitle, link)
-    return heading
+        return subtitle
+    else:
+        return ""
