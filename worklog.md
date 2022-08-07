@@ -30,6 +30,7 @@
   - Rework how Calendar Events are built
   - Begin on Calendar Event save
   - Able to save, display, and check Calendar Events
-- (9) August 7, 2022, 5:30pm-6:30pm (1:00 hours)
+- (9) August 7, 2022, 5:30pm-6:45pm (1:15 hours)
   - Refactor Council Meeting flow to match news post & calendar event
   - Get basic scan working, along with display/check page
+  - Had to work through issue where not all council meetings titles have time in them

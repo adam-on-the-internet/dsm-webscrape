@@ -38,7 +38,7 @@ def build_council_meeting_summary(council_meeting_heading):
     full_title = soup_util.get_text_from_element(breadcrumbs_element)
     full_title_pieces = full_title.split("@")
     title = full_title_pieces[0].strip()
-    time = full_title_pieces[1].strip()
+    time = get_time(full_title_pieces)
     agenda_detail = soup_util.get_elements_of_type_with_class(page, "div", "agendadetail")[0]
     links = get_links(agenda_detail)
     date_pieces = get_date_pieces(agenda_detail)
@@ -46,6 +46,13 @@ def build_council_meeting_summary(council_meeting_heading):
     month = date_pieces[0]
     year = f"20{date_pieces[2]}"
     return CouncilMeetingSummary(day, month, year, time, title, subtitle, url, links)
+
+
+def get_time(full_title_pieces):
+    if len(full_title_pieces) > 1:
+        return full_title_pieces[1].strip()
+    else:
+        return ""
 
 
 def get_date_pieces(agenda_detail):
