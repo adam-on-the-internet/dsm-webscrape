@@ -1,5 +1,5 @@
 class CouncilMeetingSummary:
-    def __init__(self, day, month, year, time, title, subtitle, url, links):
+    def __init__(self, day, month, year, time, title, subtitle, url, links, __id):
         self.day = day
         self.month = month
         self.year = year
@@ -8,13 +8,13 @@ class CouncilMeetingSummary:
         self.title = title
         self.subtitle = subtitle
         self.links = links
-        self.id = None
+        self.__id = __id
 
     def get_date_full(self):
         return f"{self.year}-{self.month}-{self.day}"
 
     def get_status(self):
-        if self.id is None:
+        if self.__id is None:
             return "UPDATED"
         else:
             return "FOUND"

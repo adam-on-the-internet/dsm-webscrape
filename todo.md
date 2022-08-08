@@ -1,5 +1,9 @@
 # TODO
 
+## ISSUES 
+
+- Calendar Events keep re-discovering?
+
 ## Cleaning Up
 
 - refine "requirements.txt" to remove unused items
@@ -7,7 +11,6 @@
 ## Data Work
 
 - Council Meetings (In Progress)
-  - Finalize NEW flow
   - Start UPDATE flow
   - "Check" should check checkMessage
   - Logic for which meetings to re-scan

@@ -1,7 +1,7 @@
 from models.CouncilMeeting.CouncilMeetingHeading import CouncilMeetingHeading
 from models.CouncilMeeting.CouncilMeetingSummary import CouncilMeetingSummary
 from repo import council_meeting_repo
-from util import soup_util
+from util import soup_util, date_util
 
 
 def get_council_meetings():
@@ -31,12 +31,26 @@ def find_new_council_meetings():
 
 
 def find_updated_council_meetings():
-    # TODO actually find updated council meetings
-    # Pull Existing Data
-    # Select Range (Use Range for Calendar Events with Month Offset -1, 0, 1)
-    # Existing Data vs Current Website
-    # Return any updated versions
+    timely_council_meetings = get_timely_council_meetings()
+    for meeting in timely_council_meetings:
+        print(f"Checking for updates for meeting {meeting.get_date_full()} {meeting.title} {meeting.url}")
+        # TODO Compare Existing Data vs Current Website Data. If updates, update + return.
+    # TODO Return any updated versions
     return []
+
+
+def get_timely_council_meetings():
+    # Pull Existing Data
+    existing_council_meetings = council_meeting_repo.get_council_meetings()
+    # Select Existing Council Meetings in Range (Use Range for Calendar Events with Month Offset -1, 0, 1)
+    timely_council_meetings = []
+    offset = 1
+    month_year_stamps = date_util.pick_month_year_stamps(offset)
+    for existing_council_meeting in existing_council_meetings:
+        month_year_stamp = f"{existing_council_meeting.month}-{existing_council_meeting.year}"
+        if month_year_stamp in month_year_stamps:
+            timely_council_meetings.append(existing_council_meeting)
+    return timely_council_meetings
 
 
 def get_summaries_for_headings(council_meeting_headings):
@@ -62,7 +76,7 @@ def build_council_meeting_summary(council_meeting_heading):
     day = date_pieces[1]
     month = date_pieces[0]
     year = f"20{date_pieces[2]}"
-    return CouncilMeetingSummary(day, month, year, time, title, subtitle, url, links)
+    return CouncilMeetingSummary(day, month, year, time, title, subtitle, url, links, None)
 
 
 def get_time(full_title_pieces):

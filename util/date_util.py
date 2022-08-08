@@ -13,6 +13,7 @@ def sort_items_by_date(items):
     items.sort(key=lambda x: datetime.datetime.strptime(x.get_date_full(), "%Y-%m-%d"), reverse=False)
 
 
+# Returns list of month & year values formatted as 'MM-YYYY'
 def pick_month_year_stamps(offset_count):
     relative_start = offset_count * -1
     relative_end = offset_count + 1
