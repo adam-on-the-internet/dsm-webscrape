@@ -1,9 +1,5 @@
 # TODO
 
-## ISSUES 
-
-- Calendar Events keep re-discovering?
-
 ## Cleaning Up
 
 - refine "requirements.txt" to remove unused items
@@ -11,11 +7,8 @@
 ## Data Work
 
 - Council Meetings (In Progress)
-  - Start UPDATE flow
-  - "Check" should check checkMessage
-  - Logic for which meetings to re-scan
-  - Logic for meetings found that are updated
-  - How to display updates?
+  - Finish UPDATE flow
+  - Verify UPDATE display
 - Council Agendas (Not Started)
   - Begin... capture plaintext of any Council Meetings in Range (Months -1,0,+1)
   - Save FOUND
@@ -28,7 +21,7 @@
   - Better Display? 
   - Types/Organization? 
   - ENHANCEMENTS?
-- YouTube videos (Not Started)
+- YouTube Videos (Not Started)
 - Tweets (Not Started)
 - Any Other Data? (Not Started)
   - Boards and commissions https://www.dsm.city/government/boards_and_commissions/index.php
