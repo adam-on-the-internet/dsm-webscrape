@@ -1,17 +1,19 @@
 ---
 title: DSM Site Updated - {{ date | date('dddd, MMMM Do') }}
-labels: found
+labels: scrape
 ---
 
 ## DSM Site Updated
 
-We found one or more new updates to the City of Des Moines Website.
+We found {{ env.COUNT }} update(s) to the City of Des Moines Website.
 
-- Number of updates found: {{ env.COUNT }}
-- For more info, go to: [https://www.dsmpeoplestownhall.com/#/dsm-city-updates](https://www.dsmpeoplestownhall.com/#/dsm-city-updates)
+For more info, go to: [https://www.dsmpeoplestownhall.com/#/dsm-city-updates](https://www.dsmpeoplestownhall.com/#/dsm-city-updates)
 
-## Details
+This scan checks for:
 
-This scan currently checks for:
-
-- News Posts
+- New News Posts
+- New Calendar Events
+- New Council Meetings
+- Updated Council Meetings (TBD)
+- New Council Agendas (TBD)
+- Updated Council Agendas (TBD)

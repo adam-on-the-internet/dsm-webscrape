@@ -34,3 +34,8 @@
   - Refactor Council Meeting flow to match news post & calendar event
   - Get basic scan working, along with display/check page
   - Had to work through issue where not all council meetings titles have time in them
+- (10) August 7, 2022, 9:45pm-?
+  - Setting up Found vs Updated for council meetings
+  - Starting to use "check_message" and allow updating council meetings
+  - 
+

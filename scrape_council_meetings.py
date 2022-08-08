@@ -5,9 +5,11 @@ from util import soup_util
 
 
 def get_council_meetings():
-    council_meetings = find_council_meetings()
-    save_council_meetings(council_meetings)
-    return council_meetings
+    new_council_meetings = find_new_council_meetings()
+    save_council_meetings(new_council_meetings)
+    updated_council_meetings = find_updated_council_meetings()
+    update_council_meetings(updated_council_meetings)
+    return new_council_meetings + updated_council_meetings
 
 
 def save_council_meetings(council_meetings):
@@ -16,10 +18,25 @@ def save_council_meetings(council_meetings):
         print(f"  + {council_meeting.get_message()}")
 
 
-def find_council_meetings():
+def update_council_meetings(council_meetings):
+    for council_meeting in council_meetings:
+        council_meeting_repo.update_council_meeting(council_meeting)
+        print(f"  + {council_meeting.get_message()}")
+
+
+def find_new_council_meetings():
     council_meeting_headings = get_council_meeting_headings()
     found_headings = find_new_and_updated_headings(council_meeting_headings)
     return get_summaries_for_headings(found_headings)
+
+
+def find_updated_council_meetings():
+    # TODO actually find updated council meetings
+    # Pull Existing Data
+    # Select Range (Use Range for Calendar Events with Month Offset -1, 0, 1)
+    # Existing Data vs Current Website
+    # Return any updated versions
+    return []
 
 
 def get_summaries_for_headings(council_meeting_headings):
@@ -98,20 +115,10 @@ def find_new_and_updated_headings(council_meeting_headings):
     existing_urls = council_meeting_repo.get_council_meeting_urls()
 
     for heading in council_meeting_headings:
-        # Get New meetings
         if heading.url not in existing_urls:
-            found_council_meeting_headings.append(heading)
-        # Get Recent Existing meetings
-        elif heading_is_recent(heading):
-            # TODO how to handle updated meetings?
             found_council_meeting_headings.append(heading)
 
     return found_council_meeting_headings
-
-
-def heading_is_recent(heading):
-    # TODO use heading date to check recency (TRUE for meetings with month offset -1/0/+1)
-    return False
 
 
 def get_council_meeting_headings():

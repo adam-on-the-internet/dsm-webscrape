@@ -21,7 +21,7 @@ class CalendarEvent:
         return f"{self.year}-{self.month}-{self.day}"
 
     def get_message(self):
-        return f"CALENDAR EVENT: {self.get_date_full()} {self.time} {self.name}"
+        return f"CALENDAR EVENT FOUND: {self.get_date_full()} {self.time} {self.name}"
 
     def to_json(self):
         return {

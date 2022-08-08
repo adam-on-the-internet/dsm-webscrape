@@ -18,6 +18,12 @@ def save_council_meeting(council_meeting):
     request_util.post_json(datasource_url, json_data)
 
 
+def update_council_meeting(council_meeting):
+    json_data = council_meeting.to_json()
+    update_url = datasource_url + f"/{council_meeting.id}/update"
+    request_util.post_json(update_url, json_data)
+
+
 def get_url_property(item):
     return item['url']
 

@@ -8,12 +8,19 @@ class CouncilMeetingSummary:
         self.title = title
         self.subtitle = subtitle
         self.links = links
+        self.id = None
 
     def get_date_full(self):
         return f"{self.year}-{self.month}-{self.day}"
 
+    def get_status(self):
+        if self.id is None:
+            return "UPDATED"
+        else:
+            return "FOUND"
+
     def get_message(self):
-        return f"COUNCIL MEETING: {self.get_date_full()} {self.title} ({self.url}) [{len(self.links)} link(s)]"
+        return f"COUNCIL MEETING {self.get_status()}: {self.get_date_full()} {self.title} ({self.url}) [{len(self.links)} link(s)]"
 
     def to_json(self):
         return {

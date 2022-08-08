@@ -7,7 +7,7 @@ class NewsPost:
         self.page_content = page_content
 
     def get_message(self):
-        return f"NEWS: {self.heading_title} ({self.url})"
+        return f"NEWS POST FOUND: {self.heading_title} ({self.url})"
 
     def to_json(self):
         return {
