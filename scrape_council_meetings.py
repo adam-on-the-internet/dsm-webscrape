@@ -26,17 +26,19 @@ def update_council_meetings(council_meetings):
 
 def find_new_council_meetings():
     council_meeting_headings = get_council_meeting_headings()
-    found_headings = find_new_and_updated_headings(council_meeting_headings)
+    found_headings = find_new_headings(council_meeting_headings)
     return get_summaries_for_headings(found_headings)
 
 
 def find_updated_council_meetings():
+    updated_meetings = []
     timely_council_meetings = get_timely_council_meetings()
-    for meeting in timely_council_meetings:
-        print(f"Checking for updates for meeting {meeting.get_date_full()} {meeting.title} {meeting.url}")
-        # TODO Compare Existing Data vs Current Website Data. If updates, update + return.
-    # TODO Return any updated versions
-    return []
+    for existing_meeting in timely_council_meetings:
+        current_meeting = build_council_meeting_summary(existing_meeting.url)
+        if current_meeting != existing_meeting:
+            current_meeting.meeting_id = existing_meeting.meeting_id
+            updated_meetings.append(current_meeting)
+    return updated_meetings
 
 
 def get_timely_council_meetings():
@@ -56,13 +58,12 @@ def get_timely_council_meetings():
 def get_summaries_for_headings(council_meeting_headings):
     council_meeting_summaries = []
     for council_meeting_heading in council_meeting_headings:
-        council_meeting_summary = build_council_meeting_summary(council_meeting_heading)
+        council_meeting_summary = build_council_meeting_summary(council_meeting_heading.url)
         council_meeting_summaries.append(council_meeting_summary)
     return council_meeting_summaries
 
 
-def build_council_meeting_summary(council_meeting_heading):
-    url = council_meeting_heading.url
+def build_council_meeting_summary(url):
     page = soup_util.convert_url_to_soup(url)
     breadcrumbs_element = get_breadcrumbs_element(page)
     subtitle = get_subtitle_for_summary(breadcrumbs_element)
@@ -124,7 +125,7 @@ def get_links(agenda_detail):
     return links
 
 
-def find_new_and_updated_headings(council_meeting_headings):
+def find_new_headings(council_meeting_headings):
     found_council_meeting_headings = []
     existing_urls = council_meeting_repo.get_council_meeting_urls()
 

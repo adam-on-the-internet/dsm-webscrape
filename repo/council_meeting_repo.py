@@ -32,8 +32,8 @@ def build_council_meeting_from_json(item):
     subtitle = item['subtitle']
     links = item['links']
     url = item['url']
-    __id = item['_id']
-    return CouncilMeetingSummary(day, month, year, time, title, subtitle, url, links, __id)
+    meeting_id = item['_id']
+    return CouncilMeetingSummary(day, month, year, time, title, subtitle, url, links, meeting_id)
 
 
 def save_council_meeting(council_meeting):
@@ -43,7 +43,7 @@ def save_council_meeting(council_meeting):
 
 def update_council_meeting(council_meeting):
     json_data = council_meeting.to_json()
-    update_url = datasource_url + f"/{council_meeting.__id}/update"
+    update_url = datasource_url + f"/{council_meeting.meeting_id}/update"
     request_util.post_json(update_url, json_data)
 
 

@@ -7,8 +7,7 @@
 ## Data Work
 
 - Council Meetings (In Progress)
-  - Finish UPDATE flow
-  - Verify UPDATE display
+  - For check_message_log, use sensible datetime string
 - Council Agendas (Not Started)
   - Begin... capture plaintext of any Council Meetings in Range (Months -1,0,+1)
   - Save FOUND
