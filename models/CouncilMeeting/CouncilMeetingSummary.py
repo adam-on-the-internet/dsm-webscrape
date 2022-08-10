@@ -15,6 +15,9 @@ class CouncilMeetingSummary:
                self.time == other.time and self.url == other.url and self.title == other.title and \
                self.subtitle == other.subtitle and self.links == other.links
 
+    def get_meeting_code(self):
+        return f"{self.year}_{self.month}_{self.day}_{self.title.replace(' ', '_')}"
+
     def get_date_full(self):
         return f"{self.year}-{self.month}-{self.day}"
 
