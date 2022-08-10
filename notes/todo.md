@@ -12,14 +12,15 @@
   - Save FOUND
   - Save UPDATED (skip if not updated)
   - Parse Plaintext into useful version
-- Council Meetings (Working)
-  - ENHANCEMENTS?
-- Press Releases (Working)
-  - SHOW page_content in web view
   - ENHANCEMENTS?
 - Calendar Events (Working)
   - Better Display? 
   - Types/Organization? 
+  - ENHANCEMENTS?
+- Council Meetings (Working)
+  - ENHANCEMENTS?
+- Press Releases (Working)
+  - page_content image sourcing issue? 
   - ENHANCEMENTS?
 
 ## Future Data Work
