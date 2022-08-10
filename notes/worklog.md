@@ -48,6 +48,8 @@
   - Began building out agenda scrape logic, with PDF & Plaintext local files
 - (13) August 9, 2022, 11:20pm-11:35pm (0:15 hours)
   - Displaying news post content in our website
-- (14) August 10, 2022, 7:25-7:30am (0:05 hours)
+- (14) August 10, 2022, 7:25am-7:30am (0:05 hours)
   - Fixed filename issue
   - Started README
+- (15) August 10, 2022, 9:00am-9:05am (0:05 hours)
+  - Update CRON times
