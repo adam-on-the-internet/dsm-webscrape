@@ -20,7 +20,7 @@ def scan_agenda_url(agenda_url, meeting):
 
     # Prepare directories
     file_util.make_directory_if_not_exists('data/agendas/')
-    file_util.make_directory_if_not_exists(f'data/agendas/{meeting.get_meeting_code()}')
+    file_util.make_directory_if_not_exists(f'data/agendas/{meeting.get_meeting_code()}/')
 
     # Download original PDF
     pdf_filename = f'data/agendas/{meeting.get_meeting_code()}.pdf'
