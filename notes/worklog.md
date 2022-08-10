@@ -43,4 +43,6 @@
   - Handle complex update messages for council meetings, plus check_message_log added
   - Update for council meetings working, with nice messages
   - Checked relevant data
-- (12) August 9, 2022, 8:45pm-
+- (12) August 9, 2022, 8:45pm-10:30pm (1:45 hours)
+  - Built better update messages for council meetings
+  - Began building out agenda scrape logic, with PDF & Plaintext local files

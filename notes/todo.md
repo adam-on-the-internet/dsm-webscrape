@@ -5,12 +5,12 @@
 - refine "requirements.txt" to remove unused items
 - Data View for management vs non-management
 
-## Data Work
+## Operational Data Work
 
-- Council Agendas (Not Started)
-  - Begin... capture plaintext of any Council Meetings in Range (Months -1,0,+1)
+- Council Agendas (In Progress)
+  - Handle basic scan logic w/ plaintext
   - Save FOUND
-  - Save UPDATED
+  - Save UPDATED (skip if not updated)
   - Parse Plaintext into useful version
 - Council Meetings (Working)
   - ENHANCEMENTS?
@@ -21,6 +21,9 @@
   - Better Display? 
   - Types/Organization? 
   - ENHANCEMENTS?
+
+## Future Data Work
+
 - YouTube Videos (Not Started)
 - Tweets (Not Started)
 - Any Other Data? (Not Started)
