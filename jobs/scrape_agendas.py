@@ -4,6 +4,7 @@ from util import file_util
 
 def get_agendas():
     check_meetings_for_agendas()
+    # TODO save new vs updates?
     return []  # TODO really scrape agendas
 
 
@@ -16,16 +17,25 @@ def check_meetings_for_agendas():
 
 def scan_agenda_url(agenda_url, meeting):
     print(f"   + Scanning agenda {meeting.get_shortname()}: {agenda_url}")
+
+    # Prepare directories
     file_util.make_directory_if_not_exists('data/agendas/')
+    file_util.make_directory_if_not_exists(f'data/agendas/{meeting.get_meeting_code()}')
+
+    # Download original PDF
     pdf_filename = f'data/agendas/{meeting.get_meeting_code()}.pdf'
-    file_util.download_file_locally(agenda_url, f'data/agendas/{meeting.get_meeting_code()}.pdf')
-    plaintext_filename = f'data/agendas/{meeting.get_meeting_code()}.txt'
-    # TODO can we fix the issue with certain characters showing as � in .txt?
+    file_util.download_file_locally(agenda_url, f'data/agendas/{meeting.get_meeting_code()}/download.pdf')
+
+    # Create local plaintext version of PDF
+    plaintext_filename = f'data/agendas/{meeting.get_meeting_code()}/plaintext.txt'
     file_util.convert_pdf_to_plaintext(pdf_filename, plaintext_filename, meeting.get_shortname())
+
+    # TODO can we fix the issue with certain characters showing as � in .txt?
     # TODO save plaintext
     # TODO compare plaintext to existing version to spot differences
     # TODO if updated, get update info. else, skip
     # TODO parse plaintext to useful object
+    # TODO make debug markdown version?
 
 
 def get_meetings_to_check():
