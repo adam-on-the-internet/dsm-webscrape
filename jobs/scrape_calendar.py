@@ -47,13 +47,9 @@ def build_calendar_events(raw_events):
 
 
 def build_calendar_event(day, month, year, raw_event):
-    name = raw_event.name
-    detail = raw_event.detail
-    time = raw_event.time_begin
     if len(str(day)) == 1:
         day = f"0{day}"
-    calendar_event = CalendarEvent(raw_event, day, month, year)
-    return calendar_event
+    return CalendarEvent(raw_event, day, month, year)
 
 
 def get_timely_raw_events():
@@ -61,6 +57,7 @@ def get_timely_raw_events():
     offset = 1
     month_year_stamps = date_util.pick_month_year_stamps(offset)
     for month_year_stamp in month_year_stamps:
+        print(f"   + Checking {month_year_stamp}")
         monthly_raw_events = get_monthly_raw_events(month_year_stamp)
         raw_events = raw_events + monthly_raw_events
     return raw_events

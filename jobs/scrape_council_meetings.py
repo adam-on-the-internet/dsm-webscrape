@@ -7,8 +7,10 @@ from util import soup_util, date_util
 def get_council_meetings():
     new_council_meetings = find_new_council_meetings()
     save_council_meetings(new_council_meetings)
+
     updated_council_meetings = find_updated_council_meetings()
     update_council_meetings(updated_council_meetings)
+
     return new_council_meetings + updated_council_meetings
 
 
@@ -38,6 +40,9 @@ def find_updated_council_meetings():
         if current_meeting != existing_meeting:
             current_meeting.meeting_id = existing_meeting.meeting_id
             updated_meetings.append(current_meeting)
+            print(f"   + Updates FOUND for {existing_meeting.get_shortname()}")
+        else:
+            print(f"   + Updates NOT FOUND for {existing_meeting.get_shortname()}")
     return updated_meetings
 
 

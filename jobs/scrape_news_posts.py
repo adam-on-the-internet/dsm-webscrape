@@ -13,7 +13,7 @@ def get_news_posts():
 def save_news_posts(found_news_posts):
     for news_post in found_news_posts:
         news_post_repo.save_news_post(news_post)
-        print(f"  + {news_post.get_message()}")
+        print(f"   + {news_post.get_message()}")
 
 
 def find_news_posts():

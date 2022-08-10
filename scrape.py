@@ -2,6 +2,7 @@ from util import workflow_util
 from jobs.scrape_council_meetings import get_council_meetings
 from jobs.scrape_news_posts import get_news_posts
 from jobs.scrape_calendar import get_calendar_events
+from jobs.scrape_agendas import get_agendas
 
 
 def run_scrape():
@@ -21,9 +22,12 @@ def find_items():
     print(" - Looking for Council Meetings...")
     council_meetings = get_council_meetings()
 
+    print(" - Looking for Council Meeting Agendas...")
+    agendas = get_agendas()
+
     # TODO add more scrape elements
 
-    item_count = len(news_posts) + len(council_meetings) + len(calendar_events)
+    item_count = len(news_posts) + len(council_meetings) + len(calendar_events) + len(agendas)
     return item_count
 
 

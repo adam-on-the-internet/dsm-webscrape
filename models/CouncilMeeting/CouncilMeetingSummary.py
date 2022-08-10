@@ -24,8 +24,11 @@ class CouncilMeetingSummary:
         else:
             return "UPDATED"
 
+    def get_shortname(self):
+        return f"{self.get_date_full()} {self.title}"
+
     def get_message(self):
-        return f"COUNCIL MEETING {self.get_status()}: {self.get_date_full()} {self.title} ({self.url}) [{len(self.links)} link(s)]"
+        return f"COUNCIL MEETING {self.get_status()}: {self.get_shortname()} ({self.url}) [{len(self.links)} link(s)]"
 
     def to_json(self):
         return {
