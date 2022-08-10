@@ -31,8 +31,10 @@ def print_conclusion(item_count):
     if item_count > 0:
         print()
         print(f"!! Found {item_count} updated item(s) !!")
+        print("!! Details: https://www.dsmpeoplestownhall.com/#/dsm-city-updates !!")
     else:
         print()
+        print(".. No updated items found ..")
         print(".. Done ..")
 
 

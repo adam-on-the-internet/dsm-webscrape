@@ -3,16 +3,17 @@
 ## Cleaning Up
 
 - refine "requirements.txt" to remove unused items
+- Data View for management vs non-management
 
 ## Data Work
 
-- Council Meetings (In Progress)
-  - For check_message_log, use sensible datetime string
 - Council Agendas (Not Started)
   - Begin... capture plaintext of any Council Meetings in Range (Months -1,0,+1)
   - Save FOUND
   - Save UPDATED
   - Parse Plaintext into useful version
+- Council Meetings (Working)
+  - ENHANCEMENTS?
 - Press Releases (Working)
   - SHOW page_content in web view
   - ENHANCEMENTS?

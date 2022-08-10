@@ -39,7 +39,8 @@
   - Starting to use "check_message" and allow updating council meetings
   - Selecting which council meetings to check for updates
   - Fix bug with Calendar Event comparison by message
-- (11) August 8, 2022, 12:00am-12:40 (0:40 hours)
+- (11) August 8, 2022, 12:00am-12:40am (0:40 hours)
   - Handle complex update messages for council meetings, plus check_message_log added
   - Update for council meetings working, with nice messages
   - Checked relevant data
+- (12) August 9, 2022, 8:45pm-
