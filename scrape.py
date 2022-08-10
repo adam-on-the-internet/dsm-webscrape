@@ -1,10 +1,11 @@
 from util import workflow_util
-from scrape_council_meetings import get_council_meetings
-from scrape_news_posts import get_news_posts
-from scrape_calendar import get_calendar_events
+from jobs.scrape_council_meetings import get_council_meetings
+from jobs.scrape_news_posts import get_news_posts
+from jobs.scrape_calendar import get_calendar_events
 
 
 def run_scrape():
+    print()
     print("# Beginning Scrape...")
     item_count = find_items()
     print_conclusion(item_count)
