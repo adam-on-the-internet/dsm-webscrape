@@ -23,7 +23,7 @@ def scan_agenda_url(agenda_url, meeting):
     file_util.make_directory_if_not_exists(f'data/agendas/{meeting.get_meeting_code()}/')
 
     # Download original PDF
-    pdf_filename = f'data/agendas/{meeting.get_meeting_code()}/download.pdf
+    pdf_filename = f'data/agendas/{meeting.get_meeting_code()}/download.pdf'
     file_util.download_file_locally(agenda_url, pdf_filename)
 
     # Create local plaintext version of PDF
