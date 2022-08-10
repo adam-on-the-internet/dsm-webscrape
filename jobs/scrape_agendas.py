@@ -23,12 +23,13 @@ def scan_agenda_url(agenda_url, meeting):
     file_util.make_directory_if_not_exists(f'data/agendas/{meeting.get_meeting_code()}/')
 
     # Download original PDF
-    pdf_filename = f'data/agendas/{meeting.get_meeting_code()}.pdf'
-    file_util.download_file_locally(agenda_url, f'data/agendas/{meeting.get_meeting_code()}/download.pdf')
+    pdf_filename = f'data/agendas/{meeting.get_meeting_code()}/download.pdf
+    file_util.download_file_locally(agenda_url, pdf_filename)
 
     # Create local plaintext version of PDF
     plaintext_filename = f'data/agendas/{meeting.get_meeting_code()}/plaintext.txt'
-    file_util.convert_pdf_to_plaintext(pdf_filename, plaintext_filename, meeting.get_shortname())
+    plaintext_title = meeting.get_shortname()
+    file_util.convert_pdf_to_plaintext(pdf_filename, plaintext_filename, plaintext_title)
 
     # TODO can we fix the issue with certain characters showing as � in .txt?
     # TODO save plaintext
