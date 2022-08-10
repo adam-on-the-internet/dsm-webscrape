@@ -46,5 +46,8 @@
 - (12) August 9, 2022, 8:45pm-10:35pm (1:50 hours)
   - Built better update messages for council meetings
   - Began building out agenda scrape logic, with PDF & Plaintext local files
-- (13) August 9, 2022, 11:20pm-11:35 (0:15 hours)
+- (13) August 9, 2022, 11:20pm-11:35pm (0:15 hours)
   - Displaying news post content in our website
+- (14) August 10, 2022, 7:25-7:30am (0:05 hours)
+  - Fixed filename issue
+  - Started README

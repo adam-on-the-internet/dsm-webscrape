@@ -2,6 +2,7 @@
 
 ## Cleaning Up
 
+- wrtie up README
 - refine "requirements.txt" to remove unused items
 - Data View for management vs non-management
 
