@@ -9,10 +9,8 @@
 ## Operational Data Work
 
 - Council Agendas (In Progress)
-  - Handle basic scan logic w/ plaintext
-  - Save FOUND
-  - Save UPDATED (skip if not updated)
   - Parse Plaintext into useful version
+  - Output messages (real) about discoveries
   - ENHANCEMENTS?
 - Calendar Events (Working)
   - Better Display? 

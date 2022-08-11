@@ -1,6 +1,10 @@
 import datetime
 
 
+def get_current_date():
+    return datetime.datetime.now()
+
+
 def is_date_in_month_and_year(date, month, year):
     # using format: MM-DD-YYYY
     date_pieces = date.split("-")

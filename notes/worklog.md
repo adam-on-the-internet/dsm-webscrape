@@ -53,3 +53,9 @@
   - Started README
 - (15) August 10, 2022, 9:00am-9:05am (0:05 hours)
   - Update CRON times
+- (16) August 10, 2022, 5:05pm-5:20pm (0:15 hours)
+  - Work on saving plaintext
+- (17) August 10, 2022, 11:15pm-12:20pm (1:05 hours)
+  - Setup plaintext saving to db
+  - Got basic new/update/no-change logic for plaintext agendas working
+  - Started on markdown output locally

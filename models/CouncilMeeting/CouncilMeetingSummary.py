@@ -30,6 +30,18 @@ class CouncilMeetingSummary:
     def get_shortname(self):
         return f"{self.get_date_full()} {self.title}"
 
+    def get_agenda_directory_name(self):
+        return f'data/agendas/{self.get_meeting_code()}/'
+
+    def get_pdf_filename(self):
+        return f'{self.get_agenda_directory_name()}download.pdf'
+
+    def get_plaintext_filename(self):
+        return f'{self.get_agenda_directory_name()}plaintext.txt'
+
+    def get_markdown_filename(self):
+        return f'{self.get_agenda_directory_name()}markdown.md'
+
     def get_message(self):
         return f"COUNCIL MEETING {self.get_status()}: {self.get_shortname()} ({self.url}) [{len(self.links)} link(s)]"
 
