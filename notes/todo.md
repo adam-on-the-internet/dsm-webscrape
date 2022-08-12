@@ -10,8 +10,8 @@
 ## Operational Data Work
 
 - Council Agendas (In Progress)
-  - Parse Plaintext into useful version, save useful version
-  - Output displaying in web somehow... markdown? plaintext?
+  - DISPLAY plaintext sensibly in the web somehow
+  - Parse Plaintext into more useful version, save useful version
   - ENHANCEMENTS?
 - Calendar Events (Working)
   - Better Display? 

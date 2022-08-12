@@ -1,6 +1,5 @@
-from jobs.write_agenda_markdown import write_agenda_markdown
 from models.Agenda.AgendaVersion import AgendaVersion
-from repo import plaintext_agenda_repo
+from repo import agenda_version_repo
 from util import file_util
 
 
@@ -10,21 +9,19 @@ def build_agenda_version(meeting):
     file_util.download_file_locally(agenda_url, meeting.get_pdf_filename())
     current_plaintext = get_meeting_plaintext(meeting)
     status = get_agenda_status(current_plaintext, meeting)
+    # parse_agenda(current_plaintext, meeting)  # TODO run parse agenda to get extra values
+    return AgendaVersion(meeting.get_meeting_code(), current_plaintext, status)
 
+
+def parse_agenda(current_plaintext, meeting):
     lines = current_plaintext.split("\n")
-
     if meeting.is_regular_meeting():
         # TODO break this down to useful info
         intro_lines = get_intro_lines(lines)
         closing_lines = get_closing_lines(lines)
         item_lines = get_item_lines(lines)
         links = get_links(lines)
-
     # TODO if not regular meeting, we can probably just take it all as "intro lines" or something...
-
-    agenda_version = AgendaVersion(meeting, current_plaintext, status)
-    parse_plaintext_if_necessary(agenda_version)
-    return agenda_version
 
 
 def get_links(lines):
@@ -79,15 +76,8 @@ def get_closing_lines(lines):
     return closing_lines
 
 
-def parse_plaintext_if_necessary(agenda_version):
-    if agenda_version.meeting.is_regular_meeting():
-        # TODO parse plaintext to useful object
-        print(f"     * Parsing to markdown...")
-        write_agenda_markdown(agenda_version)
-
-
 def get_agenda_status(current_plaintext, meeting):
-    most_recent_plaintext = plaintext_agenda_repo.get_most_recent_plaintext(meeting.get_meeting_code())
+    most_recent_plaintext = agenda_version_repo.get_most_recent_agenda_version(meeting.get_meeting_code())
     if most_recent_plaintext is None:
         print(f"     * New Plaintext Agenda found for {meeting.get_shortname()}")
         return "NEW"

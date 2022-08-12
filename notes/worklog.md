@@ -65,3 +65,6 @@
   - Refactor into sub-jobs
 - (19) August 11, 2022, 11:25pm-11:55pm (0:30 hours)
   - Begin line breakdown logic
+- (20) August 12, 2022, 12:30pm-
+  - Simplify flow to focus around recording plaintext changes
+  - Saving agenda versions when new or updated
