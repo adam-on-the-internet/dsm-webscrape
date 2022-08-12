@@ -68,3 +68,6 @@
 - (20) August 12, 2022, 12:30pm-1:00pm (0:30 hours)
   - Simplify flow to focus around recording plaintext changes
   - Saving agenda versions when new or updated
+- (21) August 12, 2022, 4:20-
+  - Rework meeting codes
+  - Work on display of plaintext agenda content
