@@ -45,6 +45,14 @@ class CouncilMeetingSummary:
     def get_message(self):
         return f"COUNCIL MEETING {self.get_status()}: {self.get_shortname()} ({self.url}) [{len(self.links)} link(s)]"
 
+    def get_agenda_url(self):
+        for link in self.links:
+            link_pieces = link.split("::")
+            link_text = link_pieces[0].strip()
+            if "Agenda" == link_text:
+                return link_pieces[1].strip()
+        return None
+
     def to_json(self):
         return {
             "day": self.day,

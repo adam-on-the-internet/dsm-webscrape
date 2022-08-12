@@ -40,9 +40,9 @@ def find_updated_council_meetings():
         if current_meeting != existing_meeting:
             current_meeting.meeting_id = existing_meeting.meeting_id
             updated_meetings.append(current_meeting)
-            print(f"   + Updates FOUND for {existing_meeting.get_shortname()}")
+            print(f"   + Checking {existing_meeting.get_shortname()} : Found Updates")
         else:
-            print(f"   + Updates NOT FOUND for {existing_meeting.get_shortname()}")
+            print(f"   + Checking {existing_meeting.get_shortname()} : Found No Updates")
     return updated_meetings
 
 

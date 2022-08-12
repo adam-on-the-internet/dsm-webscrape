@@ -16,6 +16,7 @@ def make_directory_if_not_exists(path):
 
 
 def download_file_locally(download_url, destination_file):
+    print(f"     * Downloading file...")
     content = request_util.get_online_file_contents(download_url)
     write_file(content, destination_file)
 

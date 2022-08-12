@@ -2,15 +2,15 @@
 
 ## Cleaning Up
 
-- wrtie up README
+- write up README
 - refine "requirements.txt" to remove unused items
 - Data View for management vs non-management
 
 ## Operational Data Work
 
 - Council Agendas (In Progress)
-  - Parse Plaintext into useful version
-  - Output messages (real) about discoveries
+  - Parse Plaintext into useful version, save useful version
+  - Output displaying in web somehow... markdown? plaintext?
   - ENHANCEMENTS?
 - Calendar Events (Working)
   - Better Display? 
