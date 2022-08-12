@@ -63,3 +63,5 @@
   - Scan to plaintext for all meeting types
   - Handle branching path better with status logic and agenda version
   - Refactor into sub-jobs
+- (19) August 11, 2022, 11:25pm-11:55pm (0:30 hours)
+  - Begin line breakdown logic

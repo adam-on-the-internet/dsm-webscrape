@@ -45,6 +45,9 @@ class CouncilMeetingSummary:
     def get_message(self):
         return f"COUNCIL MEETING {self.get_status()}: {self.get_shortname()} ({self.url}) [{len(self.links)} link(s)]"
 
+    def is_regular_meeting(self):
+        return self.title == "Regular Meeting"
+
     def get_agenda_url(self):
         for link in self.links:
             link_pieces = link.split("::")
