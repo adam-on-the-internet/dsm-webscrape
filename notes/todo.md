@@ -9,15 +9,15 @@
 
 ## Operational Data Work
 
-- Council Agendas (In Progress)
-  - DISPLAY plaintext sensibly in the web somehow
+- Agenda Versions (In Progress)
   - Parse Plaintext into more useful version, save useful version
+  - ENHANCEMENTS?
+- Council Meetings (Working)
+  - Merge Display of CM + AV 
   - ENHANCEMENTS?
 - Calendar Events (Working)
   - Better Display? 
   - Types/Organization? 
-  - ENHANCEMENTS?
-- Council Meetings (Working)
   - ENHANCEMENTS?
 - Press Releases (Working)
   - page_content image sourcing issue? 
