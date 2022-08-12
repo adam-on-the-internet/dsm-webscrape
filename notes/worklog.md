@@ -59,6 +59,7 @@
   - Setup plaintext saving to db
   - Got basic new/update/no-change logic for plaintext agendas working
   - Started on markdown output locally
-- (18) August 11, 2022, 8:10pm-8:50pm (0:40 hours)
+- (18) August 11, 2022, 8:10pm-9:05pm (0:55 hours)
   - Scan to plaintext for all meeting types
   - Handle branching path better with status logic and agenda version
+  - Refactor into sub-jobs
