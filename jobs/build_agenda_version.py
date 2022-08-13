@@ -1,6 +1,7 @@
 from models.Agenda.AgendaVersion import AgendaVersion
 from repo import agenda_version_repo
 from util import file_util
+from jobs.parse_agenda_plaintext import parse_agenda_plaintext
 
 
 def build_agenda_version(meeting):
@@ -9,71 +10,8 @@ def build_agenda_version(meeting):
     file_util.download_file_locally(agenda_url, meeting.get_pdf_filename())
     current_plaintext = get_meeting_plaintext(meeting)
     status = get_agenda_status(current_plaintext, meeting)
-    # parse_agenda(current_plaintext, meeting)  # TODO run parse agenda to get extra values
+    parse_agenda_plaintext(current_plaintext, meeting)  # TODO run parse agenda to get extra values
     return AgendaVersion(meeting.get_meeting_code(), current_plaintext, status)
-
-
-def parse_agenda(current_plaintext, meeting):
-    lines = current_plaintext.split("\n")
-    if meeting.is_regular_meeting():
-        # TODO break this down to useful info
-        intro_lines = get_intro_lines(lines)
-        closing_lines = get_closing_lines(lines)
-        item_lines = get_item_lines(lines)
-        links = get_links(lines)
-    # TODO if not regular meeting, we can probably just take it all as "intro lines" or something...
-
-
-def get_links(lines):
-    links = []
-    add_lines = False
-    for line in lines:
-        if "---- LINKS END ----" in line.strip():
-            add_lines = False
-        if add_lines and line.strip() != "":
-            links.append(line.strip())
-        if "---- LINKS START ----" in line:
-            add_lines = True
-    return links
-
-
-def get_intro_lines(lines):
-    intro_lines = []
-    add_lines = False
-    for index, line in enumerate(lines):
-        if "1." in line.strip() and "ROLL CALL:" in lines[index + 1]:
-            add_lines = False
-        if add_lines:
-            intro_lines.append(line)
-        if "---- DOCUMENT START ----" in line:
-            add_lines = True
-    return intro_lines
-
-
-def get_item_lines(lines):
-    item_lines = []
-    add_lines = False
-    for index, line in enumerate(lines):
-        if "1." in line.strip() and "ROLL CALL:" in lines[index + 1]:
-            add_lines = True
-        if "MOTION TO ADJOURN" in line:
-            add_lines = False
-        if add_lines:
-            item_lines.append(line)
-    return item_lines
-
-
-def get_closing_lines(lines):
-    closing_lines = []
-    add_lines = False
-    for index, line in enumerate(lines):
-        if "---- DOCUMENT END ----" in line:
-            add_lines = False
-        if "MOTION TO ADJOURN" in line:
-            add_lines = True
-        if add_lines:
-            closing_lines.append(line)
-    return closing_lines
 
 
 def get_agenda_status(current_plaintext, meeting):

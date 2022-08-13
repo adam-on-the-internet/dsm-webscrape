@@ -71,3 +71,9 @@
 - (21) August 12, 2022, 4:20pm-4:40pm (0:20 hours)
   - Rework meeting codes
   - Work on display of plaintext agenda content
+- (22) August 12, 2022, 9:15pm-9:25pm (0:10 hours)
+  - Got plaintext agenda version able to be copied to clipboard
+- (23) August 12, 2022, 10:25pm-11:05pm (0:40 hours)
+  - Beginning on plaintext parsing logic
+  - Break out intro, closing, links w/ some "cleaning" logic
+  - Prepare to parse items
