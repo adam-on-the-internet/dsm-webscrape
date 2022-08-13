@@ -1,7 +1,7 @@
+from jobs.parse_agenda_plaintext import parse_agenda_plaintext
 from models.Agenda.AgendaVersion import AgendaVersion
 from repo import agenda_version_repo
 from util import file_util
-from jobs.parse_agenda_plaintext import parse_agenda_plaintext
 
 
 def build_agenda_version(meeting):
@@ -10,8 +10,17 @@ def build_agenda_version(meeting):
     file_util.download_file_locally(agenda_url, meeting.get_pdf_filename())
     current_plaintext = get_meeting_plaintext(meeting)
     status = get_agenda_status(current_plaintext, meeting)
-    parse_agenda_plaintext(current_plaintext, meeting)  # TODO run parse agenda to get extra values
-    return AgendaVersion(meeting.get_meeting_code(), current_plaintext, status)
+    parsed_agenda_pieces = parse_agenda_plaintext(current_plaintext, meeting)
+    return merge_agenda_pieces(current_plaintext, meeting, parsed_agenda_pieces, status)
+
+
+def merge_agenda_pieces(current_plaintext, meeting, parsed_agenda_pieces, status):
+    meeting_code = meeting.get_meeting_code()
+    links = parsed_agenda_pieces.links
+    intro_text = parsed_agenda_pieces.intro_text
+    item_text = parsed_agenda_pieces.item_text
+    closing_text = parsed_agenda_pieces.closing_text
+    return AgendaVersion(meeting_code, current_plaintext, status, intro_text, item_text, closing_text, links)
 
 
 def get_agenda_status(current_plaintext, meeting):

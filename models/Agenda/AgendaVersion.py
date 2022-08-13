@@ -1,9 +1,12 @@
 class AgendaVersion:
-    def __init__(self, meeting_code, plaintext, status):
+    def __init__(self, meeting_code, plaintext, status, intro_text, item_text, closing_text, links):
         self.meeting_code = meeting_code
         self.plaintext = plaintext
         self.status = status
-    #     TODO add more fields
+        self.intro_text = intro_text
+        self.item_text = item_text
+        self.closing_text = closing_text
+        self.links = links
 
     def __eq__(self, other):
         return self.meeting_code == other.meeting_code and self.plaintext == other.plaintext
@@ -14,5 +17,9 @@ class AgendaVersion:
     def to_json(self):
         return {
             "meeting_code": self.meeting_code,
-            "plaintext": self.plaintext
+            "plaintext": self.plaintext,
+            "intro_text": self.intro_text,
+            "item_text": self.item_text,
+            "closing_text": self.closing_text,
+            "links": self.links
         }
