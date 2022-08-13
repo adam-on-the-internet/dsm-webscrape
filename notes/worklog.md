@@ -77,4 +77,6 @@
   - Beginning on plaintext parsing logic
   - Break out intro, closing, links w/ some "cleaning" logic
   - Prepare to parse items
-- (24) August 12, 2022, 11:15pm-
+- (24) August 12, 2022, 11:15pm-11:55pm (0:40 hours)
+  - Save more fields (intro, closing, links, item text)
+  - Limit times to run back to hourly

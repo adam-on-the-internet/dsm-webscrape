@@ -11,7 +11,7 @@
 ## Operational Data Work
 
 - Agenda Versions (In Progress)
-  - Parse Plaintext into more useful version, save useful version
+  - Parse Items
   - ENHANCEMENTS?
 - Council Meetings (Working)
   - Merge Display of CM + AV 
