@@ -10,6 +10,10 @@
 
 ## Operational Data Work
 
+- Manual Parsing
+  - Proof of Concept. Take single agenda and parse w/ manual intervention
+  - Handle for irregular first? Items are the hard part...
+  - How to display in web...
 - Agenda Versions (In Progress)
   - Parse Items
   - ENHANCEMENTS?

@@ -10,7 +10,7 @@ def remove_blank_lines_from_start_and_end(lines):
 
 def remove_blank_lines_from_end(lines_forward):
     lines_backward = remove_blank_lines_from_start(reversed(lines_forward))
-    return reversed(lines_backward)
+    return list(reversed(lines_backward))
 
 
 def remove_blank_lines_from_start(dirty_lines):

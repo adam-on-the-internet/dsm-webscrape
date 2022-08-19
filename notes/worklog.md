@@ -80,3 +80,5 @@
 - (24) August 12, 2022, 11:15pm-11:55pm (0:40 hours)
   - Save more fields (intro, closing, links, item text)
   - Limit times to run back to hourly
+- (25) August 18, 2022, 11:40pm-12:50am (1:10 hours)
+  - Start "manual" parsing flow concept

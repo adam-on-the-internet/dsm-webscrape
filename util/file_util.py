@@ -6,6 +6,25 @@ from models.Generic.PDFExtraction import PDFExtraction
 from util import request_util
 
 
+def write_file_by_sections(path, title, sections):
+    file = open(path, "w")
+    file.write("# TITLE: " + title)
+    file.write("\n\n")
+    for section in sections:
+        write_section(file, section)
+    file.close()
+
+
+def write_section(file, section):
+    if len(section.lines) > 0:
+        file.write("## SECTION: " + section.title)
+        file.write("\n\n")
+        for line in section.lines:
+            file.write(line)
+            file.write("\n")
+        file.write("\n\n")
+
+
 def does_path_exist(path):
     return os.path.exists(path)
 
