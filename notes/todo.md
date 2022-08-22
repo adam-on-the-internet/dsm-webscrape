@@ -3,6 +3,7 @@
 ## Cleaning Up
 
 - write up README
+- use creds to save
 - refine "requirements.txt" to remove unused items
 - Data View for management vs non-management
 - Do we need intermediary data files (download, plaintext, etc?)
