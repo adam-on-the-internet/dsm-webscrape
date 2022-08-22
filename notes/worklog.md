@@ -82,3 +82,6 @@
   - Limit times to run back to hourly
 - (25) August 18, 2022, 11:40pm-12:50am (1:10 hours)
   - Start "manual" parsing flow concept
+- (26) August 21, 2022, 8:15pm-10:05pm (1:50 hours)
+  - Work on better update views on website, "management" vs "display"
+- (27)

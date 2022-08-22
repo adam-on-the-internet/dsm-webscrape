@@ -7,7 +7,7 @@ labels: scrape
 
 We found {{ env.COUNT }} update(s) to the City of Des Moines Website.
 
-For more info, go to: [https://www.dsmpeoplestownhall.com/#/dsm-city-updates](https://www.dsmpeoplestownhall.com/#/dsm-city-updates)
+For more info, go to: [https://www.dsmpeoplestownhall.com/#/dsm-updates-management](https://www.dsmpeoplestownhall.com/#/dsm-updates-management)
 
 This scan checks for:
 
