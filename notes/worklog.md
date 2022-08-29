@@ -84,4 +84,5 @@
   - Start "manual" parsing flow concept
 - (26) August 21, 2022, 8:15pm-10:10pm (1:55 hours)
   - Work on better update views on website, "management" vs "display"
-- (27)
+- (27) August 22, 2022, 4:20pm-4:25pm (0:05 hours)
+  - Fixed agenda version display issue
