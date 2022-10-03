@@ -1,6 +1,7 @@
 from repo import council_meeting_repo
 from repo import agenda_version_repo
 from jobs.plaintext_parser import parse_plaintext
+from jobs.item_parser import parse_items
 from util import file_util
 
 
@@ -14,6 +15,14 @@ def find_meeting(shortname):
 
 def find_agenda(code):
     return agenda_version_repo.get_most_recent_agenda_version(code)
+
+
+def convert_items_to_sections(agenda_items):
+    agenda_item_sections = []
+    for item in agenda_items:
+        item_section = item.to_section()
+        agenda_item_sections.append(item_section)
+    return agenda_item_sections
 
 
 # TODO this format is not great...
@@ -39,10 +48,22 @@ else:
         directory = f'data/parse/{selected_code}'
         file_util.make_directory_if_not_exists(directory)
         file_util.write_plaintext_doc(directory + '/original.txt', selected_agenda_version)
+
         print("# Splitting into sections...")
         sections = parse_plaintext(selected_agenda_version, selected_council_meeting)
         filename = directory + '/parsed.md'
         file_util.write_file_by_sections(filename, selected_shortname, sections)
+
+        print("# Trying to parse out items...")
+        item_lines = None
+        for section in sections:
+            if section.title == "Items":
+                item_lines = section.lines
+        if item_lines is not None:
+            items = parse_items(item_lines)
+            filename = directory + '/items.md'
+            item_sections = convert_items_to_sections(items)
+            file_util.write_file_by_sections(filename, selected_shortname, item_sections)
 #         TODO From here, we want to manually mark the "items" since those are not easy to auto-control
 #         It may be preferable to have an initial pass at the item marking that we can fix as needed
 #         After marking, we should be able to run another job that reads the parsed.txt and saves it to db

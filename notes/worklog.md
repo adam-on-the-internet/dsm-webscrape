@@ -86,3 +86,5 @@
   - Work on better update views on website, "management" vs "display"
 - (27) August 22, 2022, 4:20pm-4:25pm (0:05 hours)
   - Fixed agenda version display issue
+- (28) October 2, 2022, 9:25pm-11:40pm (2:20 hours)
+  - Restarted work on parse script to pull apart items

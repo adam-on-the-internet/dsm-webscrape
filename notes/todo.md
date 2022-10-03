@@ -2,6 +2,7 @@
 
 ## Cleaning Up
 
+- at start of scan, check connections w/ safety
 - write up README
 - use creds to save
 - refine "requirements.txt" to remove unused items
