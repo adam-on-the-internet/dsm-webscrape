@@ -2,6 +2,7 @@
 
 This application checks the City of Des Moines website for certain updates,
 such as News, Calendar Events, and Council Meetings.
+
 This allows the public to be quickly informed when the City publishes 
 or modifies information.
 
