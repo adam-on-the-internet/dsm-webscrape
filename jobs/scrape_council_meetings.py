@@ -37,12 +37,13 @@ def find_updated_council_meetings():
     timely_council_meetings = get_timely_council_meetings()
     for existing_meeting in timely_council_meetings:
         current_meeting = build_council_meeting_summary(existing_meeting.url)
-        if current_meeting != existing_meeting:
-            current_meeting.meeting_id = existing_meeting.meeting_id
-            updated_meetings.append(current_meeting)
-            print(f"   + Checking {existing_meeting.get_shortname()} : Found Updates")
-        else:
-            print(f"   + Checking {existing_meeting.get_shortname()} : Found No Updates")
+        if current_meeting is not None:
+            if current_meeting != existing_meeting:
+                current_meeting.meeting_id = existing_meeting.meeting_id
+                updated_meetings.append(current_meeting)
+                print(f"   + Checking {existing_meeting.get_shortname()} : Found Updates")
+            else:
+                print(f"   + Checking {existing_meeting.get_shortname()} : Found No Updates")
     return updated_meetings
 
 
@@ -64,7 +65,8 @@ def get_summaries_for_headings(council_meeting_headings):
     council_meeting_summaries = []
     for council_meeting_heading in council_meeting_headings:
         council_meeting_summary = build_council_meeting_summary(council_meeting_heading.url)
-        council_meeting_summaries.append(council_meeting_summary)
+        if council_meeting_summary is not None:
+            council_meeting_summaries.append(council_meeting_summary)
     return council_meeting_summaries
 
 
@@ -76,7 +78,10 @@ def build_council_meeting_summary(url):
     full_title_pieces = full_title.split("@")
     title = full_title_pieces[0].strip()
     time = get_time(full_title_pieces)
-    agenda_detail = soup_util.get_elements_of_type_with_class(page, "div", "agendadetail")[0]
+    agenda_detail_list = soup_util.get_elements_of_type_with_class(page, "div", "agendadetail")
+    if len(agenda_detail_list) == 0:
+        return None
+    agenda_detail = [0]
     links = get_links(agenda_detail)
     date_pieces = get_date_pieces(agenda_detail)
     day = date_pieces[1]
