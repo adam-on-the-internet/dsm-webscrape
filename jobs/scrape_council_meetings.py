@@ -81,7 +81,7 @@ def build_council_meeting_summary(url):
     agenda_detail_list = soup_util.get_elements_of_type_with_class(page, "div", "agendadetail")
     if len(agenda_detail_list) == 0:
         return None
-    agenda_detail = [0]
+    agenda_detail = agenda_detail_list[0]
     links = get_links(agenda_detail)
     date_pieces = get_date_pieces(agenda_detail)
     day = date_pieces[1]
