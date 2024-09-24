@@ -73,6 +73,8 @@ def get_summaries_for_headings(council_meeting_headings):
 def build_council_meeting_summary(url):
     page = soup_util.convert_url_to_soup(url)
     breadcrumbs_element = get_breadcrumbs_element(page)
+    if breadcrumbs_element is None:
+        return None
     subtitle = get_subtitle_for_summary(breadcrumbs_element)
     full_title = soup_util.get_text_from_element(breadcrumbs_element)
     full_title_pieces = full_title.split("@")
@@ -105,9 +107,13 @@ def get_date_pieces(agenda_detail):
 
 
 def get_breadcrumbs_element(page):
-    breadcrumbs_element = soup_util.get_elements_of_type_with_id(page, "div", "breadcrumbs")[0]
-    soup_util.remove_tags(breadcrumbs_element, "a")
-    return breadcrumbs_element
+    elements = soup_util.get_elements_of_type_with_id(page, "div", "breadcrumbs")
+    if len(elements) > 0:
+        breadcrumbs_element = elements[0]
+        soup_util.remove_tags(breadcrumbs_element, "a")
+        return breadcrumbs_element
+    else:
+        return None
 
 
 def get_subtitle_for_summary(breadcrumbs_element):
